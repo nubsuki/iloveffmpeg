@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .audio-extractor-page {
@@ -83,7 +83,10 @@
   z-index: 20;
 }
 
-.upload-card:hover, .preview-card:hover, .settings-card:hover, .result-card:hover {
+.upload-card:hover,
+.preview-card:hover,
+.settings-card:hover,
+.result-card:hover {
   border-color: rgba(200, 182, 255, 0.4);
   box-shadow: 0 15px 40px rgba(200, 182, 255, 0.15);
 }
@@ -129,11 +132,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(
+    45deg,
+    rgba(200, 182, 255, 0.2),
+    rgba(154, 121, 255, 0.1)
+  );
   border-radius: 50%;
   font-size: 1.2rem;
+  color: #c8b6ff;
 }
 
 .upload-header h2,

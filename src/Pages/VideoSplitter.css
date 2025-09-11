@@ -1,8 +1,8 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .video-splitter-page {
@@ -40,7 +40,10 @@
   gap: 2rem;
 }
 
-.upload-card,.preview-card,.splits-card,.progress-card{
+.upload-card,
+.preview-card,
+.splits-card,
+.progress-card {
   border: 1px solid rgba(200, 182, 255, 0.2);
   border-radius: 1rem;
   padding: 1rem;
@@ -51,20 +54,20 @@
   position: relative;
 }
 
-.upload-card{
+.upload-card {
   width: 100%;
   max-width: 400px;
-} 
+}
 
-.preview-card{
+.preview-card {
   width: 100%;
 }
 
-.splits-card{
+.splits-card {
   width: 100%;
 }
 
-.progress-card{
+.progress-card {
   position: absolute;
   bottom: 3.5%;
   left: 10%;
@@ -73,7 +76,9 @@
   z-index: 20;
 }
 
-.upload-card:hover, .preview-card:hover, .splits-card:hover {
+.upload-card:hover,
+.preview-card:hover,
+.splits-card:hover {
   border-color: rgba(200, 182, 255, 0.4);
   box-shadow: 0 15px 40px rgba(200, 182, 255, 0.15);
 }
@@ -101,18 +106,26 @@
 }
 
 /* Header Styling */
-.upload-header, .preview-header, .splits-header {
+.upload-header,
+.preview-header,
+.splits-header {
   display: flex;
   align-items: center;
   gap: 0.8rem;
   margin-bottom: 1.5rem;
 }
 
-.upload-icon, .preview-icon, .splits-icon {
+.upload-icon,
+.preview-icon,
+.splits-icon {
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  background: linear-gradient(45deg, rgba(200, 182, 255, 0.2), rgba(154, 121, 255, 0.1));
+  background: linear-gradient(
+    45deg,
+    rgba(200, 182, 255, 0.2),
+    rgba(154, 121, 255, 0.1)
+  );
   display: flex;
   align-items: center;
   justify-content: center;
@@ -120,7 +133,9 @@
   color: #c8b6ff;
 }
 
-.upload-header h2, .preview-header h2, .splits-header h2 {
+.upload-header h2,
+.preview-header h2,
+.splits-header h2 {
   font-size: 1.4rem;
   font-weight: 700;
   color: white;
@@ -213,7 +228,9 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Video Container */
@@ -283,19 +300,22 @@
   align-items: end;
 }
 
-.split-name, .time-control {
+.split-name,
+.time-control {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
 }
 
-.split-name label, .time-control label {
+.split-name label,
+.time-control label {
   font-size: 0.8rem;
   font-weight: 600;
   color: #c8b6ff;
 }
 
-.name-input, .time-input {
+.name-input,
+.time-input {
   padding: 0.6rem;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(200, 182, 255, 0.2);
@@ -305,7 +325,8 @@
   transition: all 0.3s ease;
 }
 
-.name-input:focus, .time-input:focus {
+.name-input:focus,
+.time-input:focus {
   outline: none;
   border-color: rgba(200, 182, 255, 0.5);
   background: rgba(255, 255, 255, 0.15);
@@ -313,7 +334,7 @@
 }
 
 .time-input {
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
 }
 
 .time-input-group {
@@ -373,7 +394,8 @@
   flex-wrap: wrap;
 }
 
-.add-btn, .process-btn {
+.add-btn,
+.process-btn {
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -440,7 +462,7 @@
 }
 
 .progress-text {
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
   color: rgba(255, 255, 255, 0.9);
   font-size: 0.9rem;
 }
@@ -461,9 +483,15 @@
 }
 
 @keyframes progress-animation {
-  0% { width: 0%; }
-  50% { width: 70%; }
-  100% { width: 100%; }
+  0% {
+    width: 0%;
+  }
+  50% {
+    width: 70%;
+  }
+  100% {
+    width: 100%;
+  }
 }
 
 /* Animations */
