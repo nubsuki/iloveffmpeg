@@ -11,7 +11,8 @@ import {
   FaStar,
   FaGamepad,
 } from "react-icons/fa";
-
+import { FaHeart } from "react-icons/fa6";
+import { SiBuymeacoffee } from "react-icons/si";
 const Home = () => {
   const navigate = useNavigate();
 
@@ -32,25 +33,34 @@ const Home = () => {
         <div className="footer-container">
           <div className="footer-content">
             <div className="footer-brand">
-              <h3></h3>
-              <p></p>
+              <h3>I<span className="heart-icon"><FaHeart /></span>FFmpeg</h3>
+              <p>FFmpeg-powered tools for everyone - free forever. Support me with a coffee!</p>
             </div>
 
             <div className="footer-social">
               <a
-                href="https://github.com/nubsuki"
+                href="https://github.com/nubsuki/iloveffmpeg"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-link"
               >
                 <FaGithubAlt />
-                <span>Built by nubsuki</span>
+                <span>Open-source</span>
+              </a>
+              <a
+                href="https://buymeacoffee.com/nubsuki"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-link"
+              >
+                <SiBuymeacoffee />
+                <span>Donate</span>
               </a>
             </div>
           </div>
 
           <div className="footer-bottom">
-            <p>&copy; 2025 All rights reserved.</p>
+            <p>&copy; iLoveFFmpeg 2025 All rights reserved.</p>
           </div>
         </div>
       </footer>

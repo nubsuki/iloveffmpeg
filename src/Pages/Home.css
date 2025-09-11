@@ -479,13 +479,43 @@
 }
 
 .footer-brand h3 {
-  font-size: 2rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #c8b6ff 0%, #9a79ff 100%);
+  font-size: 28px;
+  background: linear-gradient(45deg, #c8b6ff, #9a79ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 0.5rem;
+  text-shadow: 0 0 20px rgba(200, 182, 255, 0.5);
+  font-weight: 700;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  transition: all 0.3s ease;
+  margin: 0 0 10px 0;
+}
+
+.footer-brand .heart-icon {
+  color: #ff4757;
+  display: inline-flex;
+  align-items: center;
+  animation: heartbeat 2s ease-in-out infinite;
+  margin: 0 1px;
+  transform: translateY(-1px);
+}
+
+.footer-brand h3:hover .heart-icon {
+  color: #ff3742;
+  animation: heartbeat 0.8s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: translateY(-1px) scale(1);
+  }
+  50% {
+    transform: translateY(-1px) scale(1.15);
+  }
 }
 
 .footer-brand p {
@@ -496,6 +526,7 @@
 .footer-social {
   display: flex;
   align-items: center;
+  gap: 1rem;
 }
 
 .social-link {
