@@ -1,6 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import { FFmpeg } from "@ffmpeg/ffmpeg";
-import { toBlobURL } from "@ffmpeg/util";
+import { useState, useRef } from "react";
+import { useFFmpeg } from "../contexts/FFmpegContext";
 import {
   FaUpload,
   FaPlay,
@@ -16,51 +15,13 @@ import "./VideoSplitter.css";
 const VideoSplitter = () => {
   const [video, setVideo] = useState(null);
   const [videoUrl, setVideoUrl] = useState("");
-  const [ffmpeg, setFFmpeg] = useState(null);
-  const [loaded, setLoaded] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const { ffmpeg, loaded, getLatestLog, clearLogs } = useFFmpeg();
   const [splits, setSplits] = useState([
     { startTime: "00:00:00", endTime: "00:00:10", name: "segment_1" },
   ]);
   const [processing, setProcessing] = useState(false);
   const [progress, setProgress] = useState("");
   const videoRef = useRef(null);
-
-  // Initialize FFmpeg
-  useEffect(() => {
-    const loadFFmpeg = async () => {
-      const ffmpegInstance = new FFmpeg();
-
-      ffmpegInstance.on("log", ({ message }) => {
-        setProgress(message);
-      });
-
-      try {
-        // Use the latest core that matches your FFmpeg version
-        const baseURL = "https://unpkg.com/@ffmpeg/core-mt@0.12.6/dist/esm";
-        await ffmpegInstance.load({
-          coreURL: await toBlobURL(
-            `${baseURL}/ffmpeg-core.js`,
-            "text/javascript"
-          ),
-          wasmURL: await toBlobURL(
-            `${baseURL}/ffmpeg-core.wasm`,
-            "application/wasm"
-          ),
-          workerURL: await toBlobURL(
-            `${baseURL}/ffmpeg-core.worker.js`,
-            "text/javascript"
-          ),
-        });
-        setFFmpeg(ffmpegInstance);
-        setLoaded(true);
-      } catch (error) {
-        console.error("Failed to load FFmpeg:", error);
-      }
-    };
-
-    loadFFmpeg();
-  }, []);
 
   const handleVideoUpload = (event) => {
     const file = event.target.files[0];
@@ -124,6 +85,15 @@ const VideoSplitter = () => {
 
     setProcessing(true);
     setProgress("Starting video processing...");
+    clearLogs(); // Clear previous logs
+
+    // Set up a progress updater
+    const progressInterval = setInterval(() => {
+      const latestLog = getLatestLog();
+      if (latestLog) {
+        setProgress(latestLog);
+      }
+    }, 500);
 
     try {
       // Write input video to FFmpeg filesystem
@@ -175,6 +145,7 @@ const VideoSplitter = () => {
       console.error("Error processing video:", error);
       setProgress(`Error: ${error.message}`);
     } finally {
+      clearInterval(progressInterval);
       setProcessing(false);
     }
   };
@@ -208,12 +179,6 @@ const VideoSplitter = () => {
           </div>
 
           <div className="status-indicator">
-            {!loaded && (
-              <div className="status loading">
-                <div className="loading-spinner"></div>
-                Loading FFmpeg... Please wait.
-              </div>
-            )}
             {loaded && (
               <div className="status success"><FaCheck/> FFmpeg loaded and ready!</div>
             )}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaHeart,FaScissors } from "react-icons/fa6";
-import { FaPlay , FaVolumeUp, FaExchangeAlt } from "react-icons/fa";
+import { FaHeart, FaScissors } from "react-icons/fa6";
+import { LuFileMusic } from "react-icons/lu";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -28,29 +28,13 @@ const Navbar = () => {
                     <span className="tool-icon"><FaScissors /></span>
                     Video Splitter
                   </Link>
-                  <Link to="/video-converter" className="dropdown-item">
-                    <span className="tool-icon"><FaExchangeAlt /></span>
-                    Video Converter
-                  </Link>
-                  <Link to="/video-compressor" className="dropdown-item">
-                    <span className="tool-icon"><FaPlay /></span>
-                    Video Compressor
-                  </Link>
                 </div>
                 
                 <div className="dropdown-column">
                   <h3 className="column-title">Audio</h3>
-                  <Link to="/audio-converter" className="dropdown-item">
-                    <span className="tool-icon"><FaExchangeAlt /></span>
-                    Audio Converter
-                  </Link>
-                  <Link to="/audio-compressor" className="dropdown-item">
-                    <span className="tool-icon"><FaVolumeUp /></span>
-                    Audio Compressor
-                  </Link>
-                  <Link to="/audio-splitter" className="dropdown-item">
-                    <span className="tool-icon"><FaScissors /></span>
-                    Audio Splitter
+                  <Link to="/audio-extractor" className="dropdown-item">
+                    <span className="tool-icon"><LuFileMusic /></span>
+                    Audio Extractor
                   </Link>
                 </div>
               </div>
