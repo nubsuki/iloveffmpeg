@@ -6,10 +6,11 @@ import {
   FaPlus,
   FaTrash,
   FaClock,
-  FaRocket,
   FaCheck,
+  FaCog,
 } from "react-icons/fa";
 import { FaScissors } from "react-icons/fa6";
+import { TbProgressBolt } from "react-icons/tb";
 import "./VideoSplitter.css";
 
 const VideoSplitter = () => {
@@ -98,7 +99,9 @@ const VideoSplitter = () => {
     try {
       // Write input video to FFmpeg filesystem
       const inputData = new Uint8Array(await video.arrayBuffer());
-      await ffmpeg.writeFile("input.mp4", inputData);
+      const inputExtension = video.name.split(".").pop().toLowerCase();
+      const inputFileName = `input.${inputExtension}`;
+      await ffmpeg.writeFile(inputFileName, inputData);
 
       // Process each split
       for (let i = 0; i < splits.length; i++) {
@@ -110,7 +113,7 @@ const VideoSplitter = () => {
         // FFmpeg command to split video
         await ffmpeg.exec([
           "-i",
-          "input.mp4",
+          inputFileName,
           "-ss",
           split.startTime,
           "-to",
@@ -139,7 +142,7 @@ const VideoSplitter = () => {
       }
 
       // Clean up input file
-      await ffmpeg.deleteFile("input.mp4");
+      await ffmpeg.deleteFile(inputFileName);
       setProgress("All segments processed successfully!");
     } catch (error) {
       console.error("Error processing video:", error);
@@ -152,15 +155,24 @@ const VideoSplitter = () => {
 
   return (
     <div className="video-splitter-page">
-      {/* Upload Section - Centered when no video, positioned when video uploaded */}
-      <div className={`upload-section ${video ? 'has-video' : ''}`}>
+      {/* Page Header */}
+      <div className="page-header">
+        <h1 className="page-title">Video Splitter</h1>
+        <p className="page-subtitle">
+          Split your videos into multiple segments with precise timing
+        </p>
+      </div>
+
+      {/* Main Content */}
+      <div className={`content-wrapper ${video ? "has-media" : ""}`}>
+        {/* Upload Section */}
         <div className="upload-card">
           <div className="card-glow"></div>
-          <div className="upload-header">
-            <div className="upload-icon">
+          <div className="card-header">
+            <div className="card-icon">
               <FaUpload />
             </div>
-            <h2>Upload Video</h2>
+            <h2 className="card-title">Upload Video</h2>
           </div>
 
           <div className="file-upload-area">
@@ -173,162 +185,176 @@ const VideoSplitter = () => {
             />
             <label htmlFor="video-upload" className="file-label">
               <FaUpload />
-              <span>Choose Video File</span>
-              <small>Supports MP4, AVI, MOV, and more</small>
+              <span className="upload-text">Choose Video File</span>
+              <small className="upload-hint">
+                Supports MP4, AVI, MOV, and more
+              </small>
             </label>
           </div>
 
-          <div className="status-indicator">
-            {loaded && (
-              <div className="status success"><FaCheck/> FFmpeg loaded and ready!</div>
-            )}
-          </div>
+          {loaded && (
+            <div className="status-indicator">
+              <div className="status">
+                <FaCheck /> FFmpeg loaded and ready!
+              </div>
+            </div>
+          )}
         </div>
-      </div>
 
-      {/* Video Content - Only shows when video is uploaded */}
-      {video && (
-        <div className="video-content">
-          {/* Video Preview */}
-          <div className="preview-card">
+        {/* Progress Section */}
+        {progress && video && (
+          <div className="progress-card">
             <div className="card-glow"></div>
-            <div className="preview-header">
-              <div className="preview-icon">
-                <FaPlay />
+            <div className="card-header">
+              <div className="card-icon">
+                <TbProgressBolt />
               </div>
-              <h2>Video Preview</h2>
+              <h3 className="card-title">Processing Progress</h3>
             </div>
-
-            <div className="video-container">
-              <video
-                ref={videoRef}
-                src={videoUrl}
-                controls
-                className="video-player"
-              />
-              <p className="video-hint">
-                Use the video controls to find the timestamps you want to split
-              </p>
-            </div>
-          </div>
-
-          {/* Splits Section */}
-          <div className="splits-card">
-            <div className="card-glow"></div>
-            <div className="splits-header">
-              <div className="splits-icon">
-                <FaScissors />
-              </div>
-              <h2>Video Splits</h2>
-            </div>
-
-            <div className="splits-list">
-              {splits.map((split, index) => (
-                <div key={index} className="split-item">
-                  <div className="split-item-glow"></div>
-                  <div className="split-controls">
-                    <div className="split-name">
-                      <label>Segment Name</label>
-                      <input
-                        type="text"
-                        placeholder="Segment name"
-                        value={split.name}
-                        onChange={(e) =>
-                          updateSplit(index, "name", e.target.value)
-                        }
-                        className="name-input"
-                      />
-                    </div>
-
-                    <div className="time-control">
-                      <label>Start Time</label>
-                      <div className="time-input-group">
-                        <input
-                          type="text"
-                          placeholder="00:00:00"
-                          value={split.startTime}
-                          onChange={(e) =>
-                            updateSplit(index, "startTime", e.target.value)
-                          }
-                          className="time-input"
-                        />
-                        <button
-                          onClick={() => setCurrentTime(index)}
-                          className="time-btn"
-                          disabled={!video}
-                        >
-                          <FaClock />
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="time-control">
-                      <label>End Time</label>
-                      <div className="time-input-group">
-                        <input
-                          type="text"
-                          placeholder="00:00:10"
-                          value={split.endTime}
-                          onChange={(e) =>
-                            updateSplit(index, "endTime", e.target.value)
-                          }
-                          className="time-input"
-                        />
-                        <button
-                          onClick={() => setCurrentEndTime(index)}
-                          className="time-btn"
-                          disabled={!video}
-                        >
-                          <FaClock />
-                        </button>
-                      </div>
-                    </div>
-
-                    <button
-                      onClick={() => removeSplit(index)}
-                      className="remove-btn"
-                      disabled={splits.length === 1}
-                    >
-                      <FaTrash />
-                    </button>
-                  </div>
+            <div className="progress-content">
+              <div className="progress-text">{progress}</div>
+              {processing && (
+                <div className="progress-bar">
+                  <div className="progress-fill"></div>
                 </div>
-              ))}
-            </div>
-
-            <div className="splits-actions">
-              <button onClick={addSplit} className="add-btn">
-                <FaPlus />
-                Add Split
-              </button>
-              <button
-                onClick={processVideo}
-                disabled={!loaded || processing || !video}
-                className="process-btn"
-              >
-                <FaRocket />
-                {processing ? "Processing..." : "Split Video"}
-              </button>
+              )}
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Progress Section */}
-      {progress && (
-        <div className="progress-card">
-          <div className="card-glow"></div>
-          <h3>Processing Progress</h3>
-          <div className="progress-content">
-            <div className="progress-text">{progress}</div>
-            {processing && (
-              <div className="progress-bar">
-                <div className="progress-fill"></div>
+        {/* Video Content */}
+        {video && (
+          <>
+            {/* Video Preview */}
+            <div className="preview-card">
+              <div className="card-glow"></div>
+              <div className="card-header">
+                <div className="card-icon">
+                  <FaPlay />
+                </div>
+                <h2 className="card-title">Video Preview</h2>
               </div>
-            )}
-          </div>
-        </div>
-      )}
+
+              <div className="media-container">
+                <video
+                  ref={videoRef}
+                  src={videoUrl}
+                  controls
+                  className="media-player"
+                />
+                <p className="media-hint">
+                  Use the controls to find the timestamps you want to split
+                </p>
+              </div>
+            </div>
+
+            {/* Splits Settings */}
+            <div className="settings-card">
+              <div className="card-glow"></div>
+              <div className="card-header">
+                <div className="card-icon">
+                  <FaScissors />
+                </div>
+                <h2 className="card-title">Video Splits</h2>
+              </div>
+
+              <div className="settings-content">
+                <div className="splits-list">
+                  {splits.map((split, index) => (
+                    <div key={index} className="split-item">
+                      <div className="split-item-glow"></div>
+                      <div className="split-controls">
+                        <button
+                          onClick={() => removeSplit(index)}
+                          className="remove-btn"
+                          disabled={splits.length === 1}
+                          title="Remove split"
+                        >
+                          <FaTrash />
+                        </button>
+
+                        <div className="split-name">
+                          <label>Segment Name</label>
+                          <input
+                            type="text"
+                            placeholder="Segment name"
+                            value={split.name}
+                            onChange={(e) =>
+                              updateSplit(index, "name", e.target.value)
+                            }
+                            className="name-input"
+                          />
+                        </div>
+
+                        <div className="time-controls-row">
+                          <div className="time-control">
+                            <label>Start Time</label>
+                            <div className="time-input-group">
+                              <input
+                                type="text"
+                                placeholder="00:00:00"
+                                value={split.startTime}
+                                onChange={(e) =>
+                                  updateSplit(index, "startTime", e.target.value)
+                                }
+                                className="time-input"
+                              />
+                              <button
+                                onClick={() => setCurrentTime(index)}
+                                className="time-btn"
+                                disabled={!video}
+                              >
+                                Current
+                              </button>
+                            </div>
+                          </div>
+
+                          <div className="time-control">
+                            <label>End Time</label>
+                            <div className="time-input-group">
+                              <input
+                                type="text"
+                                placeholder="00:00:10"
+                                value={split.endTime}
+                                onChange={(e) =>
+                                  updateSplit(index, "endTime", e.target.value)
+                                }
+                                className="time-input"
+                              />
+                              <button
+                                onClick={() => setCurrentEndTime(index)}
+                                className="time-btn"
+                                disabled={!video}
+                              >
+                                Current
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="splits-actions">
+                  <button onClick={addSplit} className="add-btn">
+                    <FaPlus />
+                    Add Split
+                  </button>
+                  <button
+                    onClick={processVideo}
+                    disabled={!loaded || processing || !video}
+                    className="process-btn"
+                  >
+                    <FaScissors />
+                    {processing ? "Processing..." : "Split Video"}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };
