@@ -120,6 +120,8 @@ const AudioExtractor = () => {
         ffmpegArgs.push("-ss", startTime, "-to", endTime);
       }
 
+      ffmpegArgs.push("-threads", "0");
+
       // Add format-specific arguments
       switch (audioFormat) {
         case "mp3":
