@@ -6,11 +6,11 @@ import {
   FaDownload,
   FaMusic,
   FaCog,
-  FaRocket,
   FaCheck,
   FaVolumeUp,
 } from "react-icons/fa";
 import { FaWaveSquare } from "react-icons/fa6";
+import { TbProgressBolt } from "react-icons/tb";
 import "./AudioExtractor.css";
 
 const AudioExtractor = () => {
@@ -176,15 +176,22 @@ const AudioExtractor = () => {
 
   return (
     <div className="audio-extractor-page">
-      {/* Upload Section */}
-      <div className={`upload-section ${video ? 'has-video' : ''}`}>
+      {/* Page Header */}
+      <div className="page-header">
+        <h1 className="page-title">Audio Extractor</h1>
+        <p className="page-subtitle">Extract high-quality audio from any video or audio file</p>
+      </div>
+
+      {/* Main Content */}
+      <div className={`content-wrapper ${video ? 'has-media' : ''}`}>
+        {/* Upload Section */}
         <div className="upload-card">
           <div className="card-glow"></div>
-          <div className="upload-header">
-            <div className="upload-icon">
+          <div className="card-header">
+            <div className="card-icon">
               <FaUpload />
             </div>
-            <h2>Upload Media File</h2>
+            <h2 className="card-title">Upload Media</h2>
           </div>
 
           <div className="file-upload-area">
@@ -197,224 +204,231 @@ const AudioExtractor = () => {
             />
             <label htmlFor="media-upload" className="file-label">
               <FaUpload />
-              <span>Choose Video or Audio File</span>
-              <small>Supports MP4, AVI, MOV, MP3, WAV, and more</small>
+              <span className="upload-text">Choose Video or Audio File</span>
+              <small className="upload-hint">Supports MP4, AVI, MOV, MP3, WAV, and more</small>
             </label>
           </div>
 
-          <div className="status-indicator">
-            {loaded && (
-              <div className="status success"><FaCheck/> FFmpeg loaded and ready!</div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Media Content */}
-      {video && (
-        <div className="media-content">
-          {/* Media Preview */}
-          <div className="preview-card">
-            <div className="card-glow"></div>
-            <div className="preview-header">
-              <div className="preview-icon">
-                <FaPlay />
-              </div>
-              <h2>Media Preview</h2>
-            </div>
-
-            <div className="media-container">
-              {video.type.startsWith("video/") ? (
-                <video
-                  ref={videoRef}
-                  src={videoUrl}
-                  controls
-                  className="media-player"
-                />
-              ) : (
-                <audio
-                  ref={videoRef}
-                  src={videoUrl}
-                  controls
-                  className="audio-player"
-                />
-              )}
-              <p className="media-hint">
-                Use the controls to preview and find specific timestamps
-              </p>
-            </div>
-          </div>
-
-          {/* Settings Card */}
-          <div className="settings-card">
-            <div className="card-glow"></div>
-            <div className="settings-header">
-              <div className="settings-icon">
-                <FaCog />
-              </div>
-              <h2>Audio Settings</h2>
-            </div>
-
-            <div className="settings-content">
-              {/* Format Selection */}
-              <div className="setting-group">
-                <label>Output Format</label>
-                <div className="format-options">
-                  {formatOptions.map((format) => (
-                    <button
-                      key={format.value}
-                      onClick={() => {
-                        setAudioFormat(format.value);
-                        if (qualityOptions[format.value]) {
-                          setAudioQuality(qualityOptions[format.value][1].value);
-                        }
-                      }}
-                      className={`format-btn ${audioFormat === format.value ? 'active' : ''}`}
-                    >
-                      <span className="format-name">{format.label}</span>
-                      <span className="format-desc">{format.description}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Quality Selection */}
-              {qualityOptions[audioFormat] && (
-                <div className="setting-group">
-                  <label>Quality</label>
-                  <div className="quality-options">
-                    {qualityOptions[audioFormat].map((quality) => (
-                      <button
-                        key={quality.value}
-                        onClick={() => setAudioQuality(quality.value)}
-                        className={`quality-btn ${audioQuality === quality.value ? 'active' : ''}`}
-                      >
-                        <span className="quality-name">{quality.label}</span>
-                        <span className="quality-desc">{quality.description}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Time Range Selection */}
-              <div className="setting-group">
-                <div className="extraction-mode">
-                  <label className="mode-toggle">
-                    <input
-                      type="checkbox"
-                      checked={extractFullAudio}
-                      onChange={(e) => setExtractFullAudio(e.target.checked)}
-                    />
-                    <span>Extract full audio</span>
-                  </label>
-                </div>
-
-                {!extractFullAudio && (
-                  <div className="time-range">
-                    <div className="time-control">
-                      <label>Start Time</label>
-                      <div className="time-input-group">
-                        <input
-                          type="text"
-                          placeholder="00:00:00"
-                          value={startTime}
-                          onChange={(e) => setStartTime(e.target.value)}
-                          className="time-input"
-                        />
-                        <button
-                          onClick={setCurrentStartTime}
-                          className="time-btn"
-                          disabled={!video}
-                        >
-                          Current
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="time-control">
-                      <label>End Time</label>
-                      <div className="time-input-group">
-                        <input
-                          type="text"
-                          placeholder="00:01:00"
-                          value={endTime}
-                          onChange={(e) => setEndTime(e.target.value)}
-                          className="time-input"
-                        />
-                        <button
-                          onClick={setCurrentEndTime}
-                          className="time-btn"
-                          disabled={!video}
-                        >
-                          Current
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Extract Button */}
-              <div className="extract-action">
-                <button
-                  onClick={extractAudio}
-                  disabled={!loaded || processing || !video}
-                  className="extract-btn"
-                >
-                  <FaWaveSquare />
-                  {processing ? "Extracting..." : "Extract Audio"}
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Audio Result */}
-          {audioUrl && (
-            <div className="result-card">
-              <div className="card-glow"></div>
-              <div className="result-header">
-                <div className="result-icon">
-                  <FaMusic />
-                </div>
-                <h2>Extracted Audio</h2>
-              </div>
-
-              <div className="result-content">
-                <audio
-                  ref={audioRef}
-                  src={audioUrl}
-                  controls
-                  className="result-audio"
-                />
-                
-                <div className="result-actions">
-                  <button onClick={downloadAudio} className="download-btn">
-                    <FaDownload />
-                    Download Audio
-                  </button>
-                </div>
+          {loaded && (
+            <div className="status-indicator">
+              <div className="status">
+                <FaCheck /> FFmpeg loaded and ready!
               </div>
             </div>
           )}
         </div>
-      )}
 
-      {/* Progress Section */}
-      {progress && (
-        <div className="progress-card">
-          <div className="card-glow"></div>
-          <h3>Processing Progress</h3>
-          <div className="progress-content">
-            <div className="progress-text">{progress}</div>
-            {processing && (
-              <div className="progress-bar">
-                <div className="progress-fill"></div>
+        {/* Progress Section*/}
+        {progress && video && (
+          <div className="progress-card">
+            <div className="card-glow"></div>
+            <div className="card-header">
+              <div className="card-icon">
+                <TbProgressBolt />
+              </div>
+              <h3 className="card-title">Processing Progress</h3>
+            </div>
+            <div className="progress-content">
+              <div className="progress-text">{progress}</div>
+              {processing && (
+                <div className="progress-bar">
+                  <div className="progress-fill"></div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Media Preview & Settings */}
+        {video && (
+          <>
+            {/* Media Preview */}
+            <div className="preview-card">
+              <div className="card-glow"></div>
+              <div className="card-header">
+                <div className="card-icon">
+                  <FaPlay />
+                </div>
+                <h2 className="card-title">Media Preview</h2>
+              </div>
+
+              <div className="media-container">
+                {video.type.startsWith("video/") ? (
+                  <video
+                    ref={videoRef}
+                    src={videoUrl}
+                    controls
+                    className="media-player"
+                  />
+                ) : (
+                  <audio
+                    ref={videoRef}
+                    src={videoUrl}
+                    controls
+                    className="audio-player"
+                  />
+                )}
+                <p className="media-hint">
+                  Use the controls to preview and find specific timestamps
+                </p>
+              </div>
+            </div>
+
+            {/* Settings */}
+            <div className="settings-card">
+              <div className="card-glow"></div>
+              <div className="card-header">
+                <div className="card-icon">
+                  <FaCog />
+                </div>
+                <h2 className="card-title">Audio Settings</h2>
+              </div>
+
+              <div className="settings-content">
+                {/* Format Selection */}
+                <div className="setting-group">
+                  <label className="setting-label">Output Format</label>
+                  <div className="format-options">
+                    {formatOptions.map((format) => (
+                      <button
+                        key={format.value}
+                        onClick={() => {
+                          setAudioFormat(format.value);
+                          if (qualityOptions[format.value]) {
+                            setAudioQuality(qualityOptions[format.value][1].value);
+                          }
+                        }}
+                        className={`format-btn ${audioFormat === format.value ? 'active' : ''}`}
+                      >
+                        <span className="format-name">{format.label}</span>
+                        <span className="format-desc">{format.description}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Quality Selection */}
+                {qualityOptions[audioFormat] && (
+                  <div className="setting-group">
+                    <label className="setting-label">Quality</label>
+                    <div className="quality-options">
+                      {qualityOptions[audioFormat].map((quality) => (
+                        <button
+                          key={quality.value}
+                          onClick={() => setAudioQuality(quality.value)}
+                          className={`quality-btn ${audioQuality === quality.value ? 'active' : ''}`}
+                        >
+                          <span className="quality-name">{quality.label}</span>
+                          <span className="quality-desc">{quality.description}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Time Range Selection */}
+                <div className="setting-group">
+                  <div className="extraction-mode">
+                    <label className="mode-toggle">
+                      <input
+                        type="checkbox"
+                        checked={extractFullAudio}
+                        onChange={(e) => setExtractFullAudio(e.target.checked)}
+                      />
+                      <span>Extract full audio</span>
+                    </label>
+                  </div>
+
+                  {!extractFullAudio && (
+                    <div className="time-range">
+                      <div className="time-control">
+                        <label>Start Time</label>
+                        <div className="time-input-group">
+                          <input
+                            type="text"
+                            placeholder="00:00:00"
+                            value={startTime}
+                            onChange={(e) => setStartTime(e.target.value)}
+                            className="time-input"
+                          />
+                          <button
+                            onClick={setCurrentStartTime}
+                            className="time-btn"
+                            disabled={!video}
+                          >
+                            Current
+                          </button>
+                        </div>
+                      </div>
+
+                      <div className="time-control">
+                        <label>End Time</label>
+                        <div className="time-input-group">
+                          <input
+                            type="text"
+                            placeholder="00:01:00"
+                            value={endTime}
+                            onChange={(e) => setEndTime(e.target.value)}
+                            className="time-input"
+                          />
+                          <button
+                            onClick={setCurrentEndTime}
+                            className="time-btn"
+                            disabled={!video}
+                          >
+                            Current
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Extract Button */}
+                <div className="extract-action">
+                  <button
+                    onClick={extractAudio}
+                    disabled={!loaded || processing || !video}
+                    className="extract-btn"
+                  >
+                    <FaWaveSquare />
+                    {processing ? "Extracting..." : "Extract Audio"}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Audio Result */}
+            {audioUrl && (
+              <div className="result-card">
+                <div className="card-glow"></div>
+                <div className="card-header">
+                  <div className="card-icon">
+                    <FaMusic />
+                  </div>
+                  <h2 className="card-title">Extracted Audio</h2>
+                </div>
+
+                <div className="result-content">
+                  <audio
+                    ref={audioRef}
+                    src={audioUrl}
+                    controls
+                    className="result-audio"
+                  />
+                  
+                  <div className="result-actions">
+                    <button onClick={downloadAudio} className="download-btn">
+                      <FaDownload />
+                      Download Audio
+                    </button>
+                  </div>
+                </div>
               </div>
             )}
-          </div>
-        </div>
-      )}
+          </>
+        )}
+      </div>
     </div>
   );
 };
