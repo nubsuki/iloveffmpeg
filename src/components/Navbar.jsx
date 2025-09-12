@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaHeart, FaScissors } from "react-icons/fa6";
 import { LuFileMusic } from "react-icons/lu";
+import { BsArrowLeftRight } from "react-icons/bs";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -27,6 +28,10 @@ const Navbar = () => {
                   <Link to="/video-splitter" className="dropdown-item">
                     <span className="tool-icon"><FaScissors /></span>
                     Video Splitter
+                  </Link>
+                  <Link to="/video-converter" className="dropdown-item">
+                    <span className="tool-icon"><BsArrowLeftRight /></span>
+                    Video Converter
                   </Link>
                 </div>
                 

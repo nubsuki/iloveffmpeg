@@ -6,6 +6,7 @@ import {
   FaShieldAlt,
   FaMusic,
 } from "react-icons/fa";
+import { BsArrowLeftRight } from "react-icons/bs";
 import { FaHeart, FaScissors } from "react-icons/fa6";
 import { SiBuymeacoffee } from "react-icons/si";
 
@@ -31,7 +32,6 @@ const Home = () => {
             
             <div className="hero-title">
               <span className="title-main">I<FaHeart className="heart-inline"/>FFmpeg</span>
-              <span className="title-subtitle">Video Tools That Don't Suck</span>
             </div>
             
             <p className="hero-description">
@@ -44,6 +44,10 @@ const Home = () => {
                 <div className="tool-item" onClick={() => navigate('/video-splitter')}>
                   <FaScissors />
                   <span>Split Videos</span>
+                </div>
+                <div className="tool-item" onClick={() => navigate('/video-converter')}>
+                  <BsArrowLeftRight />
+                  <span>Video Converter</span>
                 </div>
                 <div className="tool-item" onClick={() => navigate('/audio-extractor')}>
                   <FaMusic />

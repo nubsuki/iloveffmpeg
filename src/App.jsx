@@ -6,6 +6,7 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import VideoSplitter from './pages/VideoSplitter'
 import AudioExtractor from './pages/AudioExtractor'
+import VideoConverter from './pages/VideoConverter'
 import './App.css'
 
 function AppContent() {
@@ -15,6 +16,7 @@ function AppContent() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/video-splitter" element={<VideoSplitter />} />
+        <Route path="/video-converter" element={<VideoConverter />} />
         <Route path="/audio-extractor" element={<AudioExtractor />} />
       </Routes>
     </Router>
