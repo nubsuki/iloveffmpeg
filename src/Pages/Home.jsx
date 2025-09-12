@@ -3,16 +3,12 @@ import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import {
   FaGithubAlt,
-  FaRobot,
-  FaLinux,
-  FaUsers,
-  FaMicrochip,
-  FaArrowRight,
-  FaStar,
-  FaGamepad,
+  FaShieldAlt,
+  FaMusic,
 } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa6";
+import { FaHeart, FaScissors } from "react-icons/fa6";
 import { SiBuymeacoffee } from "react-icons/si";
+
 const Home = () => {
   const navigate = useNavigate();
 
@@ -26,6 +22,37 @@ const Home = () => {
           <div className="hero-shape hero-shape-3"></div>
           <div className="hero-gradient"></div>
         </div>
+        <div className="hero-container">
+          <div className="hero-content">
+            <div className="hero-badge">
+              <FaShieldAlt />
+              <span>Privacy-First • Ad-Free</span>
+            </div>
+            
+            <div className="hero-title">
+              <span className="title-main">I<FaHeart className="heart-inline"/>FFmpeg</span>
+              <span className="title-subtitle">Video Tools That Don't Suck</span>
+            </div>
+            
+            <p className="hero-description">
+              Hey! I built this because I was tired loosing quality when splitting videos. 
+              <strong> Your files stay on your device</strong> – no uploads, no tracking, uses your own hardware just good tools.
+            </p>
+            <div className="available-tools">
+              <h3>What You Can Do:</h3>
+              <div className="tools-list">
+                <div className="tool-item" onClick={() => navigate('/video-splitter')}>
+                  <FaScissors />
+                  <span>Split Videos</span>
+                </div>
+                <div className="tool-item" onClick={() => navigate('/audio-extractor')}>
+                  <FaMusic />
+                  <span>Extract Audio</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Footer */}
@@ -34,7 +61,7 @@ const Home = () => {
           <div className="footer-content">
             <div className="footer-brand">
               <h3>I<span className="heart-icon"><FaHeart /></span>FFmpeg</h3>
-              <p>FFmpeg-powered tools for everyone - free forever. Support me with a coffee!</p>
+              <p>FFmpeg-powered tools for everyone - free forever. Support me keep the website running!</p>
             </div>
 
             <div className="footer-social">
@@ -45,7 +72,7 @@ const Home = () => {
                 className="social-link"
               >
                 <FaGithubAlt />
-                <span>Open-source</span>
+                <span>Source Code</span>
               </a>
               <a
                 href="https://buymeacoffee.com/nubsuki"
@@ -54,13 +81,13 @@ const Home = () => {
                 className="social-link"
               >
                 <SiBuymeacoffee />
-                <span>Donate</span>
+                <span>Buy Me Coffee</span>
               </a>
             </div>
           </div>
 
           <div className="footer-bottom">
-            <p>&copy; iLoveFFmpeg 2025 All rights reserved.</p>
+            <p>&copy; 2025 Made with ❤️ by nubsuki</p>
           </div>
         </div>
       </footer>
