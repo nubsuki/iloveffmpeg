@@ -31,6 +31,19 @@ const VideoConverter = () => {
     { value: "mov", label: "MOV", description: "Apple format" },
   ];
 
+  // Check if video format is browser-compatible for preview
+  const isBrowserCompatible = (fileName) => {
+    const name = fileName.toLowerCase();
+    const browserCompatibleExtensions = ['.mp4', '.mov', '.m4v', '.webm'];
+    return browserCompatibleExtensions.some(ext => name.endsWith(ext));
+  };
+
+  // Check if output format is browser-compatible
+  const isOutputFormatCompatible = (format) => {
+    const browserCompatibleFormats = ['mp4', 'mov', 'm4v', 'webm'];
+    return browserCompatibleFormats.includes(format.toLowerCase());
+  };
+
   const handleVideoUpload = (event) => {
     const file = event.target.files[0];
     if (file && file.type.startsWith("video/")) {
@@ -232,15 +245,32 @@ const VideoConverter = () => {
               </div>
 
               <div className="media-container">
-                <video
-                  ref={videoRef}
-                  src={videoUrl}
-                  controls
-                  className="media-player"
-                />
-                <p className="media-hint">
-                  Preview your video before conversion
-                </p>
+                {isBrowserCompatible(video.name) ? (
+                  <>
+                    <video
+                      ref={videoRef}
+                      src={videoUrl}
+                      controls
+                      className="media-player"
+                    />
+                    <p className="media-hint">
+                      Preview your video before conversion
+                    </p>
+                  </>
+                ) : (
+                  <div className="unsupported-preview">
+                    <div className="unsupported-icon">
+                      <FaVideo />
+                    </div>
+                    <p className="unsupported-text">
+                      <strong>{video.name}</strong>
+                    </p>
+                    <p className="unsupported-hint">
+                      Browser preview not supported for this format. 
+                      The video will be converted successfully.
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -309,12 +339,27 @@ const VideoConverter = () => {
                 </div>
 
                 <div className="result-content">
-                  <video
-                    ref={resultVideoRef}
-                    src={convertedVideoUrl}
-                    controls
-                    className="result-video"
-                  />
+                  {isOutputFormatCompatible(outputFormat) ? (
+                    <video
+                      ref={resultVideoRef}
+                      src={convertedVideoUrl}
+                      controls
+                      className="result-video"
+                    />
+                  ) : (
+                    <div className="unsupported-preview">
+                      <div className="unsupported-icon">
+                        <FaVideo />
+                      </div>
+                      <p className="unsupported-text">
+                        <strong>converted_video.{outputFormat}</strong>
+                      </p>
+                      <p className="unsupported-hint">
+                        Browser preview not supported for {outputFormat.toUpperCase()} format. 
+                        Download the file to view it in a media player.
+                      </p>
+                    </div>
+                  )}
                   
                   <div className="result-actions">
                     <button onClick={downloadVideo} className="download-btn">
