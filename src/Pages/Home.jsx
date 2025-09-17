@@ -25,17 +25,12 @@ const Home = () => {
         </div>
         <div className="hero-container">
           <div className="hero-content">
-            <div className="hero-badge">
-              <FaShieldAlt />
-              <span>Privacy-First • Ad-Free</span>
-            </div>
-            
             <div className="hero-title">
               <span className="title-main">I<FaHeart className="heart-inline"/>FFmpeg</span>
             </div>
             
             <p className="hero-description"> 
-              <strong> Your files stay on your device</strong> – no uploads, no tracking, uses your own hardware just good tools.
+              <strong> Your files stay on your device</strong> – no uploads, no tracking, uses your own hardware.
             </p>
             <div className="available-tools">
               <h3>What You Can Do:</h3>

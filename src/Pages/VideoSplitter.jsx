@@ -24,12 +24,24 @@ const VideoSplitter = () => {
   const [progress, setProgress] = useState("");
   const videoRef = useRef(null);
 
+  // Check if video format is compatible for preview
+  const isBrowserCompatible = (fileName) => {
+    const name = fileName.toLowerCase();
+    const browserCompatibleExtensions = ['.mp4', '.mov', '.m4v', '.webm'];
+    return browserCompatibleExtensions.some(ext => name.endsWith(ext));
+  };
+
   const handleVideoUpload = (event) => {
     const file = event.target.files[0];
     if (file && file.type.startsWith("video/")) {
-      setVideo(file);
-      const url = URL.createObjectURL(file);
-      setVideoUrl(url);
+      // Check if it's a compatible format
+      if (isBrowserCompatible(file.name)) {
+        setVideo(file);
+        const url = URL.createObjectURL(file);
+        setVideoUrl(url);
+      } else {
+        alert('Please select a browser-compatible video format (MP4, MOV, M4V, WebM) for video splitting with preview.');
+      }
     }
   };
 
@@ -178,7 +190,7 @@ const VideoSplitter = () => {
           <div className="file-upload-area">
             <input
               type="file"
-              accept="video/*"
+              accept=".mp4,.mov,.m4v,.webm"
               onChange={handleVideoUpload}
               className="file-input"
               id="video-upload"
@@ -187,7 +199,7 @@ const VideoSplitter = () => {
               <FaUpload />
               <span className="upload-text">Choose Video File</span>
               <small className="upload-hint">
-                Supports MP4, AVI, MOV, and more
+                Supports MP4, MOV, M4V, WebM (compatible formats only)
               </small>
             </label>
           </div>
