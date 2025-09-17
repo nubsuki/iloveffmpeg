@@ -34,8 +34,7 @@ const Home = () => {
               <span className="title-main">I<FaHeart className="heart-inline"/>FFmpeg</span>
             </div>
             
-            <p className="hero-description">
-              Hey! I built this because I was tired loosing quality when splitting videos. 
+            <p className="hero-description"> 
               <strong> Your files stay on your device</strong> – no uploads, no tracking, uses your own hardware just good tools.
             </p>
             <div className="available-tools">
