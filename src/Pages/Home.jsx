@@ -37,6 +37,14 @@ const Home = () => {
       icon: <FaMusic />,
       path: '/audio-extractor',
       color: '#45b7d1'
+    },
+    {
+      id: 'audio-splitter',
+      title: 'Split Audio',
+      description: 'Trim or Split one audio file into multiple parts for easy conversion into independent audio files.',
+      icon: <FaScissors />,
+      path: '/audio-splitter',
+      color: '#45b7d1'
     }
   ];
 

@@ -6,7 +6,7 @@
   font-family: "Poppins", sans-serif;
 }
 
-.video-splitter-page {
+.audio-splitter-page {
   min-height: 100vh;
   color: white;
   padding: 6rem 2rem 2rem;
@@ -253,14 +253,48 @@
   width: 100%;
   border-radius: 0.75rem;
   margin-bottom: 1rem;
-  min-height: 300px;
-  max-height: 500px;
+  min-height: 80px;
+  max-height: 90px;
 }
 
 .media-hint {
   color: rgba(255, 255, 255, 0.6);
   font-size: 0.9rem;
   margin: 0;
+}
+
+/* Unsupported Preview Styling */
+.unsupported-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.unsupported-icon {
+  font-size: 3rem;
+  color: #c8b6ff;
+  opacity: 0.7;
+}
+
+.unsupported-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  text-align: center;
+}
+
+.unsupported-hint {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  margin: 0;
+  text-align: center;
+  line-height: 1.4;
 }
 
 /* Settings Content */
@@ -538,7 +572,7 @@
 }
 
 @media (max-width: 768px) {
-  .video-splitter-page {
+  .audio-splitter-page {
     padding: 6rem 1rem 2rem;
   }
 
