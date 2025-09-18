@@ -250,7 +250,7 @@ const AudioSplitter = () => {
                       ref={audioRef}
                       src={audioUrl}
                       controls
-                      className="media-player"
+                      className="audio-splitter-media-player"
                     />
                     <p className="media-hint">
                       Use the controls to find the timestamps you want to split
