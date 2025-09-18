@@ -7,7 +7,7 @@ import {
   FaMusic,
   FaCog,
   FaCheck,
-  FaVolumeUp,
+  FaVideo,
 } from "react-icons/fa";
 import { FaWaveSquare } from "react-icons/fa6";
 import { TbProgressBolt } from "react-icons/tb";
@@ -21,9 +21,6 @@ const AudioExtractor = () => {
   const [progress, setProgress] = useState("");
   const [audioFormat, setAudioFormat] = useState("mp3");
   const [audioQuality, setAudioQuality] = useState("192k");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
-  const [extractFullAudio, setExtractFullAudio] = useState(true);
   const [audioUrl, setAudioUrl] = useState("");
   const videoRef = useRef(null);
   const audioRef = useRef(null);
@@ -57,36 +54,20 @@ const AudioExtractor = () => {
     ],
   };
 
+  // Check if video format is browser-compatible for preview
+  const isBrowserCompatible = (fileName) => {
+    const name = fileName.toLowerCase();
+    const browserCompatibleExtensions = ['.mp4', '.mov', '.m4v', '.webm'];
+    return browserCompatibleExtensions.some(ext => name.endsWith(ext));
+  };
+
   const handleVideoUpload = (event) => {
     const file = event.target.files[0];
-    if (file && (file.type.startsWith("video/") || file.type.startsWith("audio/"))) {
+    if (file && file.type.startsWith("video/")) {
       setVideo(file);
       const url = URL.createObjectURL(file);
       setVideoUrl(url);
       setAudioUrl(""); // Reset previous audio
-    }
-  };
-
-  const formatTime = (seconds) => {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${hours.toString().padStart(2, "0")}:${minutes
-      .toString()
-      .padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
-  };
-
-  const setCurrentStartTime = () => {
-    if (videoRef.current) {
-      const currentTime = formatTime(videoRef.current.currentTime);
-      setStartTime(currentTime);
-    }
-  };
-
-  const setCurrentEndTime = () => {
-    if (videoRef.current) {
-      const currentTime = formatTime(videoRef.current.currentTime);
-      setEndTime(currentTime);
     }
   };
 
@@ -114,11 +95,6 @@ const AudioExtractor = () => {
 
       const outputFileName = `output.${audioFormat}`;
       let ffmpegArgs = ["-i", inputFileName];
-
-      // Add time range if not extracting full audio
-      if (!extractFullAudio && startTime && endTime) {
-        ffmpegArgs.push("-ss", startTime, "-to", endTime);
-      }
 
       ffmpegArgs.push("-threads", "0");
 
@@ -199,15 +175,15 @@ const AudioExtractor = () => {
           <div className="file-upload-area">
             <input
               type="file"
-              accept="video/*,audio/*"
+              accept="video/*"
               onChange={handleVideoUpload}
               className="file-input"
               id="media-upload"
             />
             <label htmlFor="media-upload" className="file-label">
               <FaUpload />
-              <span className="upload-text">Choose Video or Audio File</span>
-              <small className="upload-hint">Supports MP4, AVI, MOV, MP3, WAV, and more</small>
+              <span className="upload-text">Choose Video File</span>
+              <small className="upload-hint">Supports MP4, AVI, MOV, MKV, and more video formats</small>
             </label>
           </div>
 
@@ -251,28 +227,36 @@ const AudioExtractor = () => {
                 <div className="card-icon">
                   <FaPlay />
                 </div>
-                <h2 className="card-title">Media Preview</h2>
+                <h2 className="card-title">Video Preview</h2>
               </div>
 
               <div className="media-container">
-                {video.type.startsWith("video/") ? (
-                  <video
-                    ref={videoRef}
-                    src={videoUrl}
-                    controls
-                    className="media-player"
-                  />
+                {isBrowserCompatible(video.name) ? (
+                  <>
+                    <video
+                      ref={videoRef}
+                      src={videoUrl}
+                      controls
+                      className="media-player"
+                    />
+                    <p className="media-hint">
+                      Preview your video - full audio will be extracted
+                    </p>
+                  </>
                 ) : (
-                  <audio
-                    ref={videoRef}
-                    src={videoUrl}
-                    controls
-                    className="audio-player"
-                  />
+                  <div className="unsupported-preview">
+                    <div className="unsupported-icon">
+                      <FaVideo />
+                    </div>
+                    <p className="unsupported-text">
+                      <strong>{video.name}</strong>
+                    </p>
+                    <p className="unsupported-hint">
+                      Browser preview not supported for this format. 
+                      Audio will be extracted successfully.
+                    </p>
+                  </div>
                 )}
-                <p className="media-hint">
-                  Use the controls to preview and find specific timestamps
-                </p>
               </div>
             </div>
 
@@ -328,64 +312,6 @@ const AudioExtractor = () => {
                   </div>
                 )}
 
-                {/* Time Range Selection */}
-                <div className="setting-group">
-                  <div className="extraction-mode">
-                    <label className="mode-toggle">
-                      <input
-                        type="checkbox"
-                        checked={extractFullAudio}
-                        onChange={(e) => setExtractFullAudio(e.target.checked)}
-                      />
-                      <span>Extract full audio</span>
-                    </label>
-                  </div>
-
-                  {!extractFullAudio && (
-                    <div className="time-range">
-                      <div className="time-control">
-                        <label>Start Time</label>
-                        <div className="time-input-group">
-                          <input
-                            type="text"
-                            placeholder="00:00:00"
-                            value={startTime}
-                            onChange={(e) => setStartTime(e.target.value)}
-                            className="time-input"
-                          />
-                          <button
-                            onClick={setCurrentStartTime}
-                            className="time-btn"
-                            disabled={!video}
-                          >
-                            Current
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="time-control">
-                        <label>End Time</label>
-                        <div className="time-input-group">
-                          <input
-                            type="text"
-                            placeholder="00:01:00"
-                            value={endTime}
-                            onChange={(e) => setEndTime(e.target.value)}
-                            className="time-input"
-                          />
-                          <button
-                            onClick={setCurrentEndTime}
-                            className="time-btn"
-                            disabled={!video}
-                          >
-                            Current
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
                 {/* Extract Button */}
                 <div className="extract-action">
                   <button
@@ -394,7 +320,7 @@ const AudioExtractor = () => {
                     className="extract-btn"
                   >
                     <FaWaveSquare />
-                    {processing ? "Extracting..." : "Extract Audio"}
+                    {processing ? "Extracting..." : "Extract Full Audio"}
                   </button>
                 </div>
               </div>

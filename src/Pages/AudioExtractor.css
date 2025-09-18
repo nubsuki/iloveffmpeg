@@ -540,6 +540,45 @@
   }
 }
 
+/* Unsupported Preview Styles */
+.unsupported-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+}
+
+.unsupported-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: rgba(200, 182, 255, 0.1);
+  border-radius: 50%;
+  color: #c8b6ff;
+  font-size: 1.5rem;
+}
+
+.unsupported-text {
+  color: white;
+  font-weight: 600;
+  margin: 0;
+  word-break: break-word;
+}
+
+.unsupported-hint {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .content-wrapper {
