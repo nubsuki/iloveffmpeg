@@ -11,7 +11,7 @@ import {
 } from "react-icons/fa";
 import { FaWaveSquare } from "react-icons/fa6";
 import { TbProgressBolt } from "react-icons/tb";
-import "./AudioExtractor.css";
+import styles from "./AudioExtractor.module.css";
 
 const AudioExtractor = () => {
   const [video, setVideo] = useState(null);
@@ -153,43 +153,43 @@ const AudioExtractor = () => {
   };
 
   return (
-    <div className="audio-extractor-page">
+    <div className={styles.audioExtractorPage}>
       {/* Page Header */}
-      <div className="page-header">
-        <h1 className="page-title">Audio Extractor</h1>
-        <p className="page-subtitle">Extract high-quality audio from any video or audio file</p>
+      <div className={styles.pageHeader}>
+        <h1 className={styles.pageTitle}>Audio Extractor</h1>
+        <p className={styles.pageSubtitle}>Extract high-quality audio from any video or audio file</p>
       </div>
 
       {/* Main Content */}
-      <div className={`content-wrapper ${video ? 'has-media' : ''}`}>
+      <div className={`${styles.contentWrapper} ${video ? styles.hasMedia : ''}`}>
         {/* Upload Section */}
-        <div className="upload-card">
-          <div className="card-glow"></div>
-          <div className="card-header">
-            <div className="card-icon">
+        <div className={styles.uploadCard}>
+          <div className={styles.cardGlow}></div>
+          <div className={styles.cardHeader}>
+            <div className={styles.cardIcon}>
               <FaUpload />
             </div>
-            <h2 className="card-title">Upload Media</h2>
+            <h2 className={styles.cardTitle}>Upload Media</h2>
           </div>
 
-          <div className="file-upload-area">
+          <div className={styles.fileUploadArea}>
             <input
               type="file"
               accept="video/*"
               onChange={handleVideoUpload}
-              className="file-input"
+              className={styles.fileInput}
               id="media-upload"
             />
-            <label htmlFor="media-upload" className="file-label">
+            <label htmlFor="media-upload" className={styles.fileLabel}>
               <FaUpload />
-              <span className="upload-text">Choose Video File</span>
-              <small className="upload-hint">Supports MP4, AVI, MOV, MKV, and more video formats</small>
+              <span className={styles.uploadText}>Choose Video File</span>
+              <small className={styles.uploadHint}>Supports MP4, AVI, MOV, MKV, and more video formats</small>
             </label>
           </div>
 
           {loaded && (
-            <div className="status-indicator">
-              <div className="status">
+            <div className={styles.statusIndicator}>
+              <div className={styles.status}>
                 <FaCheck /> FFmpeg loaded and ready!
               </div>
             </div>
@@ -198,19 +198,19 @@ const AudioExtractor = () => {
 
         {/* Progress Section*/}
         {progress && video && (
-          <div className="progress-card">
-            <div className="card-glow"></div>
-            <div className="card-header">
-              <div className="card-icon">
+          <div className={styles.progressCard}>
+            <div className={styles.cardGlow}></div>
+            <div className={styles.cardHeader}>
+              <div className={styles.cardIcon}>
                 <TbProgressBolt />
               </div>
-              <h3 className="card-title">Processing Progress</h3>
+              <h3 className={styles.cardTitle}>Processing Progress</h3>
             </div>
-            <div className="progress-content">
-              <div className="progress-text">{progress}</div>
+            <div className={styles.progressContent}>
+              <div className={styles.progressText}>{progress}</div>
               {processing && (
-                <div className="progress-bar">
-                  <div className="progress-fill"></div>
+                <div className={styles.progressBar}>
+                  <div className={styles.progressFill}></div>
                 </div>
               )}
             </div>
@@ -221,37 +221,37 @@ const AudioExtractor = () => {
         {video && (
           <>
             {/* Media Preview */}
-            <div className="preview-card">
-              <div className="card-glow"></div>
-              <div className="card-header">
-                <div className="card-icon">
+            <div className={styles.previewCard}>
+              <div className={styles.cardGlow}></div>
+              <div className={styles.cardHeader}>
+                <div className={styles.cardIcon}>
                   <FaPlay />
                 </div>
-                <h2 className="card-title">Video Preview</h2>
+                <h2 className={styles.cardTitle}>Video Preview</h2>
               </div>
 
-              <div className="media-container">
+              <div className={styles.mediaContainer}>
                 {isBrowserCompatible(video.name) ? (
                   <>
                     <video
                       ref={videoRef}
                       src={videoUrl}
                       controls
-                      className="media-player"
+                      className={styles.mediaPlayer}
                     />
-                    <p className="media-hint">
+                    <p className={styles.mediaHint}>
                       Preview your video - full audio will be extracted
                     </p>
                   </>
                 ) : (
-                  <div className="unsupported-preview">
-                    <div className="unsupported-icon">
+                  <div className={styles.unsupportedPreview}>
+                    <div className={styles.unsupportedIcon}>
                       <FaVideo />
                     </div>
-                    <p className="unsupported-text">
+                    <p className={styles.unsupportedText}>
                       <strong>{video.name}</strong>
                     </p>
-                    <p className="unsupported-hint">
+                    <p className={styles.unsupportedHint}>
                       Browser preview not supported for this format. 
                       Audio will be extracted successfully.
                     </p>
@@ -261,20 +261,20 @@ const AudioExtractor = () => {
             </div>
 
             {/* Settings */}
-            <div className="settings-card">
-              <div className="card-glow"></div>
-              <div className="card-header">
-                <div className="card-icon">
+            <div className={styles.settingsCard}>
+              <div className={styles.cardGlow}></div>
+              <div className={styles.cardHeader}>
+                <div className={styles.cardIcon}>
                   <FaCog />
                 </div>
-                <h2 className="card-title">Audio Settings</h2>
+                <h2 className={styles.cardTitle}>Audio Settings</h2>
               </div>
 
-              <div className="settings-content">
+              <div className={styles.settingsContent}>
                 {/* Format Selection */}
-                <div className="setting-group">
-                  <label className="setting-label">Output Format</label>
-                  <div className="format-options">
+                <div className={styles.settingGroup}>
+                  <label className={styles.settingLabel}>Output Format</label>
+                  <div className={styles.formatOptions}>
                     {formatOptions.map((format) => (
                       <button
                         key={format.value}
@@ -284,10 +284,10 @@ const AudioExtractor = () => {
                             setAudioQuality(qualityOptions[format.value][1].value);
                           }
                         }}
-                        className={`format-btn ${audioFormat === format.value ? 'active' : ''}`}
+                        className={`${styles.formatBtn} ${audioFormat === format.value ? styles.active : ''}`}
                       >
-                        <span className="format-name">{format.label}</span>
-                        <span className="format-desc">{format.description}</span>
+                        <span className={styles.formatName}>{format.label}</span>
+                        <span className={styles.formatDesc}>{format.description}</span>
                       </button>
                     ))}
                   </div>
@@ -295,17 +295,17 @@ const AudioExtractor = () => {
 
                 {/* Quality Selection */}
                 {qualityOptions[audioFormat] && (
-                  <div className="setting-group">
-                    <label className="setting-label">Quality</label>
-                    <div className="quality-options">
+                  <div className={styles.settingGroup}>
+                    <label className={styles.settingLabel}>Quality</label>
+                    <div className={styles.qualityOptions}>
                       {qualityOptions[audioFormat].map((quality) => (
                         <button
                           key={quality.value}
                           onClick={() => setAudioQuality(quality.value)}
-                          className={`quality-btn ${audioQuality === quality.value ? 'active' : ''}`}
+                          className={`${styles.qualityBtn} ${audioQuality === quality.value ? styles.active : ''}`}
                         >
-                          <span className="quality-name">{quality.label}</span>
-                          <span className="quality-desc">{quality.description}</span>
+                          <span className={styles.qualityName}>{quality.label}</span>
+                          <span className={styles.qualityDesc}>{quality.description}</span>
                         </button>
                       ))}
                     </div>
@@ -313,11 +313,11 @@ const AudioExtractor = () => {
                 )}
 
                 {/* Extract Button */}
-                <div className="extract-action">
+                <div className={styles.extractAction}>
                   <button
                     onClick={extractAudio}
                     disabled={!loaded || processing || !video}
-                    className="extract-btn"
+                    className={styles.extractBtn}
                   >
                     <FaWaveSquare />
                     {processing ? "Extracting..." : "Extract Full Audio"}
@@ -328,25 +328,25 @@ const AudioExtractor = () => {
 
             {/* Audio Result */}
             {audioUrl && (
-              <div className="result-card">
-                <div className="card-glow"></div>
-                <div className="card-header">
-                  <div className="card-icon">
+              <div className={styles.resultCard}>
+                <div className={styles.cardGlow}></div>
+                <div className={styles.cardHeader}>
+                  <div className={styles.cardIcon}>
                     <FaMusic />
                   </div>
-                  <h2 className="card-title">Extracted Audio</h2>
+                  <h2 className={styles.cardTitle}>Extracted Audio</h2>
                 </div>
 
-                <div className="result-content">
+                <div className={styles.resultContent}>
                   <audio
                     ref={audioRef}
                     src={audioUrl}
                     controls
-                    className="result-audio"
+                    className={styles.resultAudio}
                   />
                   
-                  <div className="result-actions">
-                    <button onClick={downloadAudio} className="download-btn">
+                  <div className={styles.resultActions}>
+                    <button onClick={downloadAudio} className={styles.downloadBtn}>
                       <FaDownload />
                       Download Audio
                     </button>
