@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./Home.css";
+import styles from "./Home.module.css";
 import {
   FaGithubAlt,
   FaMusic,
@@ -45,42 +45,50 @@ const Home = () => {
       icon: <FaScissors />,
       path: '/audio-splitter',
       color: '#45b7d1'
+    },
+    {
+      id: 'audio-converter',
+      title: 'Convert Audio',
+      description: 'Transform your audio files between different formats like MP3, WAV, AAC, OGG, and more.',
+      icon: <BsArrowLeftRight />,
+      path: '/audio-converter',
+      color: '#45b7d1'
     }
   ];
 
   return (
-    <div className="home-page">
+    <div className={styles.homePage}>
       {/* Hero Section */}
-      <div className="hero-section">
-        <div className="hero-background">
-          <div className="hero-shape hero-shape-1"></div>
-          <div className="hero-shape hero-shape-2"></div>
-          <div className="hero-shape hero-shape-3"></div>
-          <div className="hero-gradient"></div>
+      <div className={styles.heroSection}>
+        <div className={styles.heroBackground}>
+          <div className={`${styles.heroShape} ${styles.heroShape1}`}></div>
+          <div className={`${styles.heroShape} ${styles.heroShape2}`}></div>
+          <div className={`${styles.heroShape} ${styles.heroShape3}`}></div>
+          <div className={styles.heroGradient}></div>
         </div>
-        <div className="hero-container">
-          <div className="hero-content">
-            <div className="hero-title">
-              <span className="title-main">Try Now!</span>
+        <div className={styles.heroContainer}>
+          <div className={styles.heroContent}>
+            <div className={styles.heroTitle}>
+              <span className={styles.titleMain}>Try Now!</span>
             </div>
             
-            <p className="hero-description"> 
+            <p className={styles.heroDescription}> 
               <strong>Your files stay on your device</strong> – no uploads, no tracking, uses your own hardware.
             </p>
 
             {/* Tools Grid */}
-            <div className="tools-grid">
+            <div className={styles.toolsGrid}>
               {tools.map((tool) => (
                 <div
                   key={tool.id}
-                  className="tool-card"
+                  className={styles.toolCard}
                   onClick={() => navigate(tool.path)}
                 >
-                  <div className="tool-icon" style={{ color: tool.color }}>
+                  <div className={styles.toolIcon} style={{ color: tool.color }}>
                     {tool.icon}
                   </div>
-                  <h3 className="tool-title">{tool.title}</h3>
-                  <p className="tool-description">{tool.description}</p>
+                  <h3 className={styles.toolTitle}>{tool.title}</h3>
+                  <p className={styles.toolDescription}>{tool.description}</p>
                 </div>
               ))}
             </div>
@@ -89,20 +97,20 @@ const Home = () => {
       </div>
 
       {/* Footer */}
-      <footer className="footer">
-        <div className="footer-container">
-          <div className="footer-content">
-            <div className="footer-brand">
-              <h3>I<span className="heart-icon"><FaHeart /></span>FFmpeg</h3>
+      <footer className={styles.footer}>
+        <div className={styles.footerContainer}>
+          <div className={styles.footerContent}>
+            <div className={styles.footerBrand}>
+              <h3>I<span className={styles.heartIcon}><FaHeart /></span>FFmpeg</h3>
               <p>FFmpeg-powered tools for everyone - free forever. Support me keep the website running!</p>
             </div>
 
-            <div className="footer-social">
+            <div className={styles.footerSocial}>
               <a
                 href="https://github.com/nubsuki/iloveffmpeg"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="social-link"
+                className={styles.socialLink}
               >
                 <FaGithubAlt />
                 <span>Source Code</span>
@@ -111,7 +119,7 @@ const Home = () => {
                 href="https://buymeacoffee.com/nubsuki"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="social-link"
+                className={styles.socialLink}
               >
                 <SiBuymeacoffee />
                 <span>Buy Me Coffee</span>
@@ -119,7 +127,7 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="footer-bottom">
+          <div className={styles.footerBottom}>
             <p>&copy; 2025 Made with ❤️ by nubsuki</p>
           </div>
         </div>

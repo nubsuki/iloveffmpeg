@@ -6,7 +6,7 @@
   font-family: "Poppins", sans-serif;
 }
 
-.audio-extractor-page {
+.audioConverterPage {
   min-height: 100vh;
   color: white;
   padding: 6rem 2rem 2rem;
@@ -20,12 +20,12 @@
 }
 
 /* Page Header */
-.page-header {
+.pageHeader {
   text-align: center;
   margin-bottom: 2rem;
 }
 
-.page-title {
+.pageTitle {
   font-size: 2.5rem;
   font-weight: 700;
   background: linear-gradient(135deg, #c8b6ff 0%, #9a79ff 100%);
@@ -35,13 +35,13 @@
   margin-bottom: 0.5rem;
 }
 
-.page-subtitle {
+.pageSubtitle {
   color: rgba(255, 255, 255, 0.7);
   font-size: 1.1rem;
 }
 
 /* Main Grid Layout */
-.content-wrapper {
+.contentWrapper {
   width: 100%;
   max-width: 1200px;
   display: grid;
@@ -54,7 +54,7 @@
     ". result";
 }
 
-.content-wrapper:not(.has-media) {
+.contentWrapper:not(.hasMedia) {
   grid-template-columns: 1fr;
   grid-template-areas: "upload";
   max-width: 500px;
@@ -63,33 +63,33 @@
 }
 
 /* Grid Area Assignments */
-.upload-card {
+.uploadCard {
   grid-area: upload;
 }
 
-.preview-card {
+.previewCard {
   grid-area: preview;
 }
 
-.settings-card {
+.settingsCard {
   grid-area: settings;
 }
 
-.result-card {
+.resultCard {
   grid-area: result;
 }
 
-.progress-card {
+.progressCard {
   grid-area: progress;
   align-self: start;
 }
 
 /* Card Components */
-.upload-card,
-.preview-card,
-.settings-card,
-.result-card,
-.progress-card {
+.uploadCard,
+.previewCard,
+.settingsCard,
+.resultCard,
+.progressCard {
   background: rgba(26, 26, 46, 0.4);
   border: 1px solid rgba(200, 182, 255, 0.2);
   border-radius: 1rem;
@@ -102,8 +102,8 @@
 }
 
 /* Specific left column card styling */
-.upload-card,
-.progress-card {
+.uploadCard,
+.progressCard {
   width: 380px;
   max-width: 380px;
   min-width: 380px;
@@ -114,24 +114,24 @@
 }
 
 /* Upload card specific styling when no media */
-.content-wrapper:not(.has-media) .upload-card {
+.contentWrapper:not(.hasMedia) .uploadCard {
   width: 100%;
   max-width: 450px;
   min-width: auto;
   justify-self: center;
 }
 
-.upload-card:hover,
-.preview-card:hover,
-.settings-card:hover,
-.result-card:hover,
-.progress-card:hover {
+.uploadCard:hover,
+.previewCard:hover,
+.settingsCard:hover,
+.resultCard:hover,
+.progressCard:hover {
   border-color: rgba(200, 182, 255, 0.4);
   transform: translateY(-2px);
   box-shadow: 0 8px 32px rgba(200, 182, 255, 0.15);
 }
 
-.card-glow {
+.cardGlow {
   position: absolute;
   top: 0;
   left: 0;
@@ -147,23 +147,23 @@
   pointer-events: none;
 }
 
-.upload-card:hover .card-glow,
-.preview-card:hover .card-glow,
-.settings-card:hover .card-glow,
-.result-card:hover .card-glow,
-.progress-card:hover .card-glow {
+.uploadCard:hover .cardGlow,
+.previewCard:hover .cardGlow,
+.settingsCard:hover .cardGlow,
+.resultCard:hover .cardGlow,
+.progressCard:hover .cardGlow {
   opacity: 1;
 }
 
 /* Card Headers */
-.card-header {
+.cardHeader {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   margin-bottom: 1.5rem;
 }
 
-.card-icon {
+.cardIcon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -179,7 +179,7 @@
   color: #c8b6ff;
 }
 
-.card-title {
+.cardTitle {
   font-size: 1.3rem;
   font-weight: 600;
   background: linear-gradient(135deg, #c8b6ff, #ffffff);
@@ -190,15 +190,15 @@
 }
 
 /* Upload Section */
-.file-upload-area {
+.fileUploadArea {
   margin-bottom: 1rem;
 }
 
-.file-input {
+.fileInput {
   display: none;
 }
 
-.file-label {
+.fileLabel {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -211,29 +211,29 @@
   text-align: center;
 }
 
-.file-label:hover {
+.fileLabel:hover {
   border-color: #c8b6ff;
   background: rgba(200, 182, 255, 0.05);
 }
 
-.file-label svg {
+.fileLabel svg {
   font-size: 2rem;
   color: #c8b6ff;
 }
 
-.file-label .upload-text {
+.fileLabel .uploadText {
   font-size: 1rem;
   font-weight: 500;
   color: white;
 }
 
-.file-label .upload-hint {
+.fileLabel .uploadHint {
   color: rgba(255, 255, 255, 0.6);
   font-size: 0.85rem;
 }
 
 /* Status Indicator */
-.status-indicator {
+.statusIndicator {
   display: flex;
   justify-content: center;
 }
@@ -252,58 +252,53 @@
 }
 
 /* Media Preview */
-.media-container {
+.mediaContainer {
   text-align: center;
 }
 
-.media-player,
-.audio-player {
+.mediaPlayer {
   width: 100%;
   border-radius: 0.75rem;
   margin-bottom: 1rem;
-  min-height: 300px;
+  min-height: 60px;
   max-height: 500px;
 }
 
-.audio-player {
-  height: 60px;
-}
-
-.media-hint {
+.mediaHint {
   color: rgba(255, 255, 255, 0.6);
   font-size: 0.9rem;
   margin: 0;
 }
 
 /* Settings Content */
-.settings-content {
+.settingsContent {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-.setting-group {
+.settingGroup {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
-.setting-label {
+.settingLabel {
   font-size: 1rem;
   font-weight: 600;
   color: #c8b6ff;
 }
 
 /* Format & Quality Options */
-.format-options,
-.quality-options {
+.formatOptions,
+.qualityOptions {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 0.5rem;
 }
 
-.format-btn,
-.quality-btn {
+.formatBtn,
+.qualityBtn {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -318,125 +313,45 @@
   font-size: 0.85rem;
 }
 
-.format-btn:hover,
-.quality-btn:hover {
+.formatBtn:hover,
+.qualityBtn:hover {
   background: rgba(200, 182, 255, 0.1);
   border-color: #c8b6ff;
   transform: translateY(-1px);
 }
 
-.format-btn.active,
-.quality-btn.active {
+.formatBtn.active,
+.qualityBtn.active {
   background: linear-gradient(135deg, #9a79ff, #c8b6ff);
   border-color: #c8b6ff;
   box-shadow: 0 4px 15px rgba(200, 182, 255, 0.3);
 }
 
-.format-name,
-.quality-name {
+.formatName,
+.qualityName {
   font-weight: 600;
   font-size: 0.85rem;
 }
 
-.format-desc,
-.quality-desc {
+.formatDesc,
+.qualityDesc {
   font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.7);
 }
 
-.format-btn.active .format-desc,
-.quality-btn.active .quality-desc {
+.formatBtn.active .formatDesc,
+.qualityBtn.active .qualityDesc {
   color: rgba(255, 255, 255, 0.9);
 }
 
-/* Time Range Controls */
-.extraction-mode {
-  margin-bottom: 1rem;
-}
-
-.mode-toggle {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  cursor: pointer;
-  font-size: 0.95rem;
-  font-weight: 500;
-}
-
-.mode-toggle input[type="checkbox"] {
-  width: 1.25rem;
-  height: 1.25rem;
-  accent-color: #c8b6ff;
-}
-
-.time-range {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
-.time-control {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.time-control label {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 500;
-}
-
-.time-input-group {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.time-input {
-  flex: 1;
-  padding: 0.75rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0.5rem;
-  color: white;
-  font-size: 0.85rem;
-}
-
-.time-input:focus {
-  outline: none;
-  border-color: #c8b6ff;
-  box-shadow: 0 0 0 2px rgba(200, 182, 255, 0.2);
-}
-
-.time-btn {
-  padding: 0.75rem 0.75rem;
-  background: rgba(200, 182, 255, 0.2);
-  border: 1px solid #c8b6ff;
-  border-radius: 0.5rem;
-  color: white;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.75rem;
-  white-space: nowrap;
-}
-
-.time-btn:hover {
-  background: rgba(200, 182, 255, 0.3);
-}
-
-.time-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
 /* Action Buttons */
-.extract-action {
+.convertAction {
   display: flex;
   justify-content: center;
   margin-top: 1rem;
 }
 
-.extract-btn {
+.convertBtn {
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -452,36 +367,37 @@
   box-shadow: 0 4px 20px rgba(200, 182, 255, 0.3);
 }
 
-.extract-btn:hover:not(:disabled) {
+.convertBtn:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(200, 182, 255, 0.4);
 }
 
-.extract-btn:disabled {
+.convertBtn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
 }
 
 /* Result Section */
-.result-content {
+.resultContent {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
 }
 
-.result-audio {
+.resultAudio {
   width: 100%;
   border-radius: 0.5rem;
+  max-height: 400px;
 }
 
-.result-actions {
+.resultActions {
   display: flex;
   gap: 1rem;
 }
 
-.download-btn {
+.downloadBtn {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -495,26 +411,26 @@
   transition: all 0.3s ease;
 }
 
-.download-btn:hover {
+.downloadBtn:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
 }
 
 /* Progress Section */
-.progress-content {
+.progressContent {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.progress-text {
+.progressText {
   font-size: 0.9rem;
   color: rgba(255, 255, 255, 0.8);
   line-height: 1.4;
   text-align: center;
 }
 
-.progress-bar {
+.progressBar {
   width: 100%;
   height: 4px;
   background: rgba(255, 255, 255, 0.1);
@@ -522,7 +438,7 @@
   overflow: hidden;
 }
 
-.progress-fill {
+.progressFill {
   height: 100%;
   background: linear-gradient(90deg, #9a79ff, #c8b6ff);
   width: 0;
@@ -541,39 +457,84 @@
   }
 }
 
+/* Conversion Info */
+.conversionInfo {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.infoItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.infoLabel {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.infoValue {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #c8b6ff;
+}
+
+.infoNote {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.infoNote small {
+  color: #22c55e;
+  font-size: 0.8rem;
+}
+
 /* Unsupported Preview Styles */
-.unsupported-preview {
+.unsupportedPreview {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  padding: 2rem;
+  padding: 2rem 1rem;
   text-align: center;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px dashed rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0.75rem;
+  margin-bottom: 1rem;
 }
 
-.unsupported-icon {
+.unsupportedIcon {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 60px;
   height: 60px;
-  background: rgba(200, 182, 255, 0.1);
+  background: linear-gradient(
+    45deg,
+    rgba(200, 182, 255, 0.2),
+    rgba(154, 121, 255, 0.1)
+  );
   border-radius: 50%;
-  color: #c8b6ff;
   font-size: 1.5rem;
+  color: #c8b6ff;
+  margin-bottom: 0.5rem;
 }
 
-.unsupported-text {
+.unsupportedText {
   color: white;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 500;
   margin: 0;
   word-break: break-word;
 }
 
-.unsupported-hint {
+.unsupportedHint {
   color: rgba(255, 255, 255, 0.6);
   font-size: 0.9rem;
   margin: 0;
@@ -582,7 +543,7 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-  .content-wrapper {
+  .contentWrapper {
     grid-template-columns: 1fr;
     grid-template-areas:
       "upload"
@@ -592,12 +553,12 @@
       "progress";
   }
 
-  .content-wrapper:not(.has-media) {
+  .contentWrapper:not(.hasMedia) {
     grid-template-areas: "upload";
   }
 
-  .upload-card,
-  .progress-card {
+  .uploadCard,
+  .progressCard {
     width: 100%;
     max-width: 100%;
     min-width: auto;
@@ -605,53 +566,49 @@
 }
 
 @media (max-width: 768px) {
-  .audio-extractor-page {
+  .audioConverterPage {
     padding: 6rem 1rem 2rem;
   }
 
-  .page-title {
+  .pageTitle {
     font-size: 2rem;
   }
 
-  .time-range {
-    grid-template-columns: 1fr;
-  }
-
-  .format-options,
-  .quality-options {
+  .formatOptions,
+  .qualityOptions {
     grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
   }
 
-  .card-title {
+  .cardTitle {
     white-space: normal;
     font-size: 1.2rem;
   }
 }
 
 @media (max-width: 480px) {
-  .upload-card,
-  .preview-card,
-  .settings-card,
-  .result-card,
-  .progress-card {
+  .uploadCard,
+  .previewCard,
+  .settingsCard,
+  .resultCard,
+  .progressCard {
     padding: 1rem;
   }
 
-  .format-options,
-  .quality-options {
+  .formatOptions,
+  .qualityOptions {
     grid-template-columns: 1fr 1fr;
   }
 
-  .extract-btn {
+  .convertBtn {
     padding: 0.875rem 1.5rem;
     font-size: 1rem;
   }
 
-  .file-label {
+  .fileLabel {
     padding: 1.5rem 1rem;
   }
 
-  .card-title {
+  .cardTitle {
     white-space: normal;
     font-size: 1.1rem;
   }
