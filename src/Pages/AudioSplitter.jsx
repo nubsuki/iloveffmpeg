@@ -10,7 +10,7 @@ import {
 } from "react-icons/fa";
 import { FaScissors } from "react-icons/fa6";
 import { TbProgressBolt } from "react-icons/tb";
-import "./AudioSplitter.css";
+import styles from "./AudioSplitter.module.css";
 
 const AudioSplitter = () => {
   const [audio, setAudio] = useState(null);
@@ -162,47 +162,47 @@ const AudioSplitter = () => {
   };
 
   return (
-    <div className="audio-splitter-page">
+    <div className={styles.audioSplitterPage}>
       {/* Page Header */}
-      <div className="page-header">
-        <h1 className="page-title">Audio Splitter</h1>
-        <p className="page-subtitle">
+      <div className={styles.pageHeader}>
+        <h1 className={styles.pageTitle}>Audio Splitter</h1>
+        <p className={styles.pageSubtitle}>
           Split your audio files into multiple segments with precise timing
         </p>
       </div>
 
       {/* Main Content */}
-      <div className={`content-wrapper ${audio ? "has-media" : ""}`}>
+      <div className={`${styles.contentWrapper} ${audio ? styles.hasMedia : ""}`}>
         {/* Upload Section */}
-        <div className="upload-card">
-          <div className="card-glow"></div>
-          <div className="card-header">
-            <div className="card-icon">
+        <div className={styles.uploadCard}>
+          <div className={styles.cardGlow}></div>
+          <div className={styles.cardHeader}>
+            <div className={styles.cardIcon}>
               <FaUpload />
             </div>
-            <h2 className="card-title">Upload Audio</h2>
+            <h2 className={styles.cardTitle}>Upload Audio</h2>
           </div>
 
-          <div className="file-upload-area">
+          <div className={styles.fileUploadArea}>
             <input
               type="file"
               accept="audio/*"
               onChange={handleAudioUpload}
-              className="file-input"
+              className={styles.fileInput}
               id="audio-upload"
             />
-            <label htmlFor="audio-upload" className="file-label">
+            <label htmlFor="audio-upload" className={styles.fileLabel}>
               <FaMusic />
-              <span className="upload-text">Choose Audio File</span>
-              <small className="upload-hint">
+              <span className={styles.uploadText}>Choose Audio File</span>
+              <small className={styles.uploadHint}>
                 Supports MP3, WAV, AAC, M4A, OGG, FLAC and other audio formats
               </small>
             </label>
           </div>
 
           {loaded && (
-            <div className="status-indicator">
-              <div className="status">
+            <div className={styles.statusIndicator}>
+              <div className={styles.status}>
                 <FaCheck /> FFmpeg loaded and ready!
               </div>
             </div>
@@ -211,19 +211,19 @@ const AudioSplitter = () => {
 
         {/* Progress Section */}
         {progress && audio && (
-          <div className="progress-card">
-            <div className="card-glow"></div>
-            <div className="card-header">
-              <div className="card-icon">
+          <div className={styles.progressCard}>
+            <div className={styles.cardGlow}></div>
+            <div className={styles.cardHeader}>
+              <div className={styles.cardIcon}>
                 <TbProgressBolt />
               </div>
-              <h3 className="card-title">Processing Progress</h3>
+              <h3 className={styles.cardTitle}>Processing Progress</h3>
             </div>
-            <div className="progress-content">
-              <div className="progress-text">{progress}</div>
+            <div className={styles.progressContent}>
+              <div className={styles.progressText}>{progress}</div>
               {processing && (
-                <div className="progress-bar">
-                  <div className="progress-fill"></div>
+                <div className={styles.progressBar}>
+                  <div className={styles.progressFill}></div>
                 </div>
               )}
             </div>
@@ -234,37 +234,37 @@ const AudioSplitter = () => {
         {audio && (
           <>
             {/* Audio Preview */}
-            <div className="preview-card">
-              <div className="card-glow"></div>
-              <div className="card-header">
-                <div className="card-icon">
+            <div className={styles.previewCard}>
+              <div className={styles.cardGlow}></div>
+              <div className={styles.cardHeader}>
+                <div className={styles.cardIcon}>
                   <FaVolumeUp />
                 </div>
-                <h2 className="card-title">Audio Preview</h2>
+                <h2 className={styles.cardTitle}>Audio Preview</h2>
               </div>
 
-              <div className="media-container">
+              <div className={styles.mediaContainer}>
                 {isBrowserCompatible(audio.name) || audio.type.startsWith("audio/") ? (
                   <>
                     <audio
                       ref={audioRef}
                       src={audioUrl}
                       controls
-                      className="audio-splitter-media-player"
+                      className={styles.audioSplitterMediaPlayer}
                     />
-                    <p className="media-hint">
+                    <p className={styles.mediaHint}>
                       Use the controls to find the timestamps you want to split
                     </p>
                   </>
                 ) : (
-                  <div className="unsupported-preview">
-                    <div className="unsupported-icon">
+                  <div className={styles.unsupportedPreview}>
+                    <div className={styles.unsupportedIcon}>
                       <FaMusic />
                     </div>
-                    <p className="unsupported-text">
+                    <p className={styles.unsupportedText}>
                       <strong>{audio.name}</strong>
                     </p>
-                    <p className="unsupported-hint">
+                    <p className={styles.unsupportedHint}>
                       Browser preview not supported for this format. 
                       Audio will be split successfully.
                     </p>
@@ -274,31 +274,31 @@ const AudioSplitter = () => {
             </div>
 
             {/* Splits Settings */}
-            <div className="settings-card">
-              <div className="card-glow"></div>
-              <div className="card-header">
-                <div className="card-icon">
+            <div className={styles.settingsCard}>
+              <div className={styles.cardGlow}></div>
+              <div className={styles.cardHeader}>
+                <div className={styles.cardIcon}>
                   <FaScissors />
                 </div>
-                <h2 className="card-title">Audio Splits</h2>
+                <h2 className={styles.cardTitle}>Audio Splits</h2>
               </div>
 
-              <div className="settings-content">
-                <div className="splits-list">
+              <div className={styles.settingsContent}>
+                <div className={styles.splitsList}>
                   {splits.map((split, index) => (
-                    <div key={index} className="split-item">
-                      <div className="split-item-glow"></div>
-                      <div className="split-controls">
+                    <div key={index} className={styles.splitItem}>
+                      <div className={styles.splitItemGlow}></div>
+                      <div className={styles.splitControls}>
                         <button
                           onClick={() => removeSplit(index)}
-                          className="remove-btn"
+                          className={styles.removeBtn}
                           disabled={splits.length === 1}
                           title="Remove split"
                         >
                           <FaTrash />
                         </button>
 
-                        <div className="split-name">
+                        <div className={styles.splitName}>
                           <label>Segment Name</label>
                           <input
                             type="text"
@@ -307,14 +307,14 @@ const AudioSplitter = () => {
                             onChange={(e) =>
                               updateSplit(index, "name", e.target.value)
                             }
-                            className="name-input"
+                            className={styles.nameInput}
                           />
                         </div>
 
-                        <div className="time-controls-row">
-                          <div className="time-control">
+                        <div className={styles.timeControlsRow}>
+                          <div className={styles.timeControl}>
                             <label>Start Time</label>
-                            <div className="time-input-group">
+                            <div className={styles.timeInputGroup}>
                               <input
                                 type="text"
                                 placeholder="00:00:00"
@@ -322,11 +322,11 @@ const AudioSplitter = () => {
                                 onChange={(e) =>
                                   updateSplit(index, "startTime", e.target.value)
                                 }
-                                className="time-input"
+                                className={styles.timeInput}
                               />
                               <button
                                 onClick={() => setCurrentTime(index)}
-                                className="time-btn"
+                                className={styles.timeBtn}
                                 disabled={!audio}
                               >
                                 Current
@@ -334,9 +334,9 @@ const AudioSplitter = () => {
                             </div>
                           </div>
 
-                          <div className="time-control">
+                          <div className={styles.timeControl}>
                             <label>End Time</label>
-                            <div className="time-input-group">
+                            <div className={styles.timeInputGroup}>
                               <input
                                 type="text"
                                 placeholder="00:00:10"
@@ -344,11 +344,11 @@ const AudioSplitter = () => {
                                 onChange={(e) =>
                                   updateSplit(index, "endTime", e.target.value)
                                 }
-                                className="time-input"
+                                className={styles.timeInput}
                               />
                               <button
                                 onClick={() => setCurrentEndTime(index)}
-                                className="time-btn"
+                                className={styles.timeBtn}
                                 disabled={!audio}
                               >
                                 Current
@@ -361,15 +361,15 @@ const AudioSplitter = () => {
                   ))}
                 </div>
 
-                <div className="splits-actions">
-                  <button onClick={addSplit} className="add-btn">
+                <div className={styles.splitsActions}>
+                  <button onClick={addSplit} className={styles.addBtn}>
                     <FaPlus />
                     Add Split
                   </button>
                   <button
                     onClick={processAudio}
                     disabled={!loaded || processing || !audio}
-                    className="process-btn"
+                    className={styles.processBtn}
                   >
                     <FaScissors />
                     {processing ? "Processing..." : "Split Audio"}

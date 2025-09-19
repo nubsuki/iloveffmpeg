@@ -10,7 +10,7 @@ import {
   FaExchangeAlt,
 } from "react-icons/fa";
 import { TbProgressBolt } from "react-icons/tb";
-import "./VideoConverter.css";
+import styles from "./VideoConverter.module.css";
 
 const VideoConverter = () => {
   const [video, setVideo] = useState(null);
@@ -167,43 +167,43 @@ const VideoConverter = () => {
   };
 
   return (
-    <div className="video-converter-page">
+    <div className={styles.videoConverterPage}>
       {/* Page Header */}
-      <div className="page-header">
-        <h1 className="page-title">Video Converter</h1>
-        <p className="page-subtitle">Convert videos between different container formats with lossless quality preservation</p>
+      <div className={styles.pageHeader}>
+        <h1 className={styles.pageTitle}>Video Converter</h1>
+        <p className={styles.pageSubtitle}>Convert videos between different container formats with lossless quality preservation</p>
       </div>
 
       {/* Main Content */}
-      <div className={`content-wrapper ${video ? 'has-media' : ''}`}>
+      <div className={`${styles.contentWrapper} ${video ? styles.hasMedia : ''}`}>
         {/* Upload Section */}
-        <div className="upload-card">
-          <div className="card-glow"></div>
-          <div className="card-header">
-            <div className="card-icon">
+        <div className={styles.uploadCard}>
+          <div className={styles.cardGlow}></div>
+          <div className={styles.cardHeader}>
+            <div className={styles.cardIcon}>
               <FaUpload />
             </div>
-            <h2 className="card-title">Upload Video</h2>
+            <h2 className={styles.cardTitle}>Upload Video</h2>
           </div>
 
-          <div className="file-upload-area">
+          <div className={styles.fileUploadArea}>
             <input
               type="file"
               accept=".mp4,.mkv,.avi,.mov,.m4v,.3gp"
               onChange={handleVideoUpload}
-              className="file-input"
+              className={styles.fileInput}
               id="video-upload"
             />
-            <label htmlFor="video-upload" className="file-label">
+            <label htmlFor="video-upload" className={styles.fileLabel}>
               <FaUpload />
-              <span className="upload-text">Choose Video File</span>
-              <small className="upload-hint">Supports MP4, MKV, AVI, MOV (lossless conversion only)</small>
+              <span className={styles.uploadText}>Choose Video File</span>
+              <small className={styles.uploadHint}>Supports MP4, MKV, AVI, MOV (lossless conversion only)</small>
             </label>
           </div>
 
           {loaded && (
-            <div className="status-indicator">
-              <div className="status">
+            <div className={styles.statusIndicator}>
+              <div className={styles.status}>
                 <FaCheck /> FFmpeg loaded and ready!
               </div>
             </div>
@@ -212,19 +212,19 @@ const VideoConverter = () => {
 
         {/* Progress Section*/}
         {progress && video && (
-          <div className="progress-card">
-            <div className="card-glow"></div>
-            <div className="card-header">
-              <div className="card-icon">
+          <div className={styles.progressCard}>
+            <div className={styles.cardGlow}></div>
+            <div className={styles.cardHeader}>
+              <div className={styles.cardIcon}>
                 <TbProgressBolt />
               </div>
-              <h3 className="card-title">Processing Progress</h3>
+              <h3 className={styles.cardTitle}>Processing Progress</h3>
             </div>
-            <div className="progress-content">
-              <div className="progress-text">{progress}</div>
+            <div className={styles.progressContent}>
+              <div className={styles.progressText}>{progress}</div>
               {processing && (
-                <div className="progress-bar">
-                  <div className="progress-fill"></div>
+                <div className={styles.progressBar}>
+                  <div className={styles.progressFill}></div>
                 </div>
               )}
             </div>
@@ -235,37 +235,37 @@ const VideoConverter = () => {
         {video && (
           <>
             {/* Video Preview */}
-            <div className="preview-card">
-              <div className="card-glow"></div>
-              <div className="card-header">
-                <div className="card-icon">
+            <div className={styles.previewCard}>
+              <div className={styles.cardGlow}></div>
+              <div className={styles.cardHeader}>
+                <div className={styles.cardIcon}>
                   <FaPlay />
                 </div>
-                <h2 className="card-title">Video Preview</h2>
+                <h2 className={styles.cardTitle}>Video Preview</h2>
               </div>
 
-              <div className="media-container">
+              <div className={styles.mediaContainer}>
                 {isBrowserCompatible(video.name) ? (
                   <>
                     <video
                       ref={videoRef}
                       src={videoUrl}
                       controls
-                      className="media-player"
+                      className={styles.mediaPlayer}
                     />
-                    <p className="media-hint">
+                    <p className={styles.mediaHint}>
                       Preview your video before conversion
                     </p>
                   </>
                 ) : (
-                  <div className="unsupported-preview">
-                    <div className="unsupported-icon">
+                  <div className={styles.unsupportedPreview}>
+                    <div className={styles.unsupportedIcon}>
                       <FaVideo />
                     </div>
-                    <p className="unsupported-text">
+                    <p className={styles.unsupportedText}>
                       <strong>{video.name}</strong>
                     </p>
-                    <p className="unsupported-hint">
+                    <p className={styles.unsupportedHint}>
                       Browser preview not supported for this format. 
                       The video will be converted successfully.
                     </p>
@@ -275,50 +275,50 @@ const VideoConverter = () => {
             </div>
 
             {/* Settings */}
-            <div className="settings-card">
-              <div className="card-glow"></div>
-              <div className="card-header">
-                <div className="card-icon">
+            <div className={styles.settingsCard}>
+              <div className={styles.cardGlow}></div>
+              <div className={styles.cardHeader}>
+                <div className={styles.cardIcon}>
                   <FaCog />
                 </div>
-                <h2 className="card-title">Conversion Settings</h2>
+                <h2 className={styles.cardTitle}>Conversion Settings</h2>
               </div>
 
-              <div className="settings-content">
+              <div className={styles.settingsContent}>
                 {/* Format Selection */}
-                <div className="setting-group">
-                  <label className="setting-label">Output Format</label>
-                  <div className="format-options">
+                <div className={styles.settingGroup}>
+                  <label className={styles.settingLabel}>Output Format</label>
+                  <div className={styles.formatOptions}>
                     {formatOptions.map((format) => (
                       <button
                         key={format.value}
                         onClick={() => setOutputFormat(format.value)}
-                        className={`format-btn ${outputFormat === format.value ? 'active' : ''}`}
+                        className={`${styles.formatBtn} ${outputFormat === format.value ? styles.active : ''}`}
                       >
-                        <span className="format-name">{format.label}</span>
-                        <span className="format-desc">{format.description}</span>
+                        <span className={styles.formatName}>{format.label}</span>
+                        <span className={styles.formatDesc}>{format.description}</span>
                       </button>
                     ))}
                   </div>
                 </div>
 
                 {/* Conversion Info */}
-                <div className="conversion-info">
-                  <div className="info-item">
-                    <span className="info-label">Conversion Type:</span>
-                    <span className="info-value">Lossless Container Change</span>
+                <div className={styles.conversionInfo}>
+                  <div className={styles.infoItem}>
+                    <span className={styles.infoLabel}>Conversion Type:</span>
+                    <span className={styles.infoValue}>Lossless Container Change</span>
                   </div>
-                  <div className="info-note">
+                  <div className={styles.infoNote}>
                     <small>✨ No quality loss - only changing the container format</small>
                   </div>
                 </div>
 
                 {/* Convert Button */}
-                <div className="convert-action">
+                <div className={styles.convertAction}>
                   <button
                     onClick={convertVideo}
                     disabled={!loaded || processing || !video}
-                    className="convert-btn"
+                    className={styles.convertBtn}
                   >
                     <FaExchangeAlt />
                     {processing ? "Converting..." : "Convert Video"}
@@ -329,40 +329,40 @@ const VideoConverter = () => {
 
             {/* Video Result */}
             {convertedVideoUrl && (
-              <div className="result-card">
-                <div className="card-glow"></div>
-                <div className="card-header">
-                  <div className="card-icon">
+              <div className={styles.resultCard}>
+                <div className={styles.cardGlow}></div>
+                <div className={styles.cardHeader}>
+                  <div className={styles.cardIcon}>
                     <FaVideo />
                   </div>
-                  <h2 className="card-title">Converted Video</h2>
+                  <h2 className={styles.cardTitle}>Converted Video</h2>
                 </div>
 
-                <div className="result-content">
+                <div className={styles.resultContent}>
                   {isOutputFormatCompatible(outputFormat) ? (
                     <video
                       ref={resultVideoRef}
                       src={convertedVideoUrl}
                       controls
-                      className="result-video"
+                      className={styles.resultVideo}
                     />
                   ) : (
-                    <div className="unsupported-preview">
-                      <div className="unsupported-icon">
+                    <div className={styles.unsupportedPreview}>
+                      <div className={styles.unsupportedIcon}>
                         <FaVideo />
                       </div>
-                      <p className="unsupported-text">
+                      <p className={styles.unsupportedText}>
                         <strong>converted_video.{outputFormat}</strong>
                       </p>
-                      <p className="unsupported-hint">
+                      <p className={styles.unsupportedHint}>
                         Browser preview not supported for {outputFormat.toUpperCase()} format. 
                         Download the file to view it in a media player.
                       </p>
                     </div>
                   )}
                   
-                  <div className="result-actions">
-                    <button onClick={downloadVideo} className="download-btn">
+                  <div className={styles.resultActions}>
+                    <button onClick={downloadVideo} className={styles.downloadBtn}>
                       <FaDownload />
                       Download Video
                     </button>
