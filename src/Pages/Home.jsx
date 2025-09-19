@@ -28,7 +28,7 @@ const Home = () => {
       description: 'Transform your video files between different formats like MP4, AVI, MOV, and more.',
       icon: <BsArrowLeftRight />,
       path: '/video-converter',
-      color: '#4ecdc4'
+      color: '#935fba'
     },
     {
       id: 'audio-extractor',
@@ -44,7 +44,7 @@ const Home = () => {
       description: 'Trim or Split one audio file into multiple parts for easy conversion into independent audio files.',
       icon: <FaScissors />,
       path: '/audio-splitter',
-      color: '#45b7d1'
+      color: '#6f50de'
     },
     {
       id: 'audio-converter',
@@ -52,7 +52,7 @@ const Home = () => {
       description: 'Transform your audio files between different formats like MP3, WAV, AAC, OGG, and more.',
       icon: <BsArrowLeftRight />,
       path: '/audio-converter',
-      color: '#45b7d1'
+      color: '#735fba'
     }
   ];
 
