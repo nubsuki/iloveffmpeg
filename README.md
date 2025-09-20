@@ -6,12 +6,9 @@ Main reason for creating this is due to quality loss when trimming in Movies&TV 
 
 ## ✨ Features
 
-**🎬 Video Tools**
 - **Video Splitter** - Trim or split videos into multiple segments
 - **Video Converter** - Convert between formats (MP4, AVI, MOV, MKV)
 - **Audio Extractor** - Extract audio tracks from video files
-
-**🎵 Audio Tools**
 - **Audio Converter** - Convert between audio formats (MP3, WAV, AAC, FLAC, OGG, M4A)
 - **Audio Splitter** - Trim or split audio files into segments
 

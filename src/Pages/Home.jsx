@@ -52,7 +52,7 @@ const Home = () => {
       description: 'Transform your audio files between different formats like MP3, WAV, AAC, OGG, and more.',
       icon: <BsArrowLeftRight />,
       path: '/audio-converter',
-      color: '#735fba'
+      color: '#6573b5'
     }
   ];
 
