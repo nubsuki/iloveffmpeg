@@ -1,12 +1,50 @@
-# React + Vite
+# ILoveFFmpeg
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Browser-based multimedia toolkit that runs entirely in your browser using [FFmpeg.wasm](https://github.com/ffmpegwasm/ffmpeg.wasm). No uploads, no tracking, complete privacy - your files never leave your device.
 
-Currently, two official plugins are available:
+Main reason for creating this is due to quality loss when trimming in Movies&TV player apps in Windows. Name is inspired by ILovePDF.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## Expanding the ESLint configuration
+**🎬 Video Tools**
+- **Video Splitter** - Trim or split videos into multiple segments
+- **Video Converter** - Convert between formats (MP4, AVI, MOV, MKV)
+- **Audio Extractor** - Extract audio tracks from video files
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+**🎵 Audio Tools**
+- **Audio Converter** - Convert between audio formats (MP3, WAV, AAC, FLAC, OGG, M4A)
+- **Audio Splitter** - Trim or split audio files into segments
+
+### Supported Formats
+
+**Video Input**: MP4, AVI, MOV, MKV, WebM, and more
+**Video Output**: MP4, AVI, MOV, MKV
+
+**Audio Input**: MP3, WAV, AAC, FLAC, OGG, M4A, and more
+**Audio Output**: MP3, WAV, AAC, FLAC, OGG, M4A
+
+## ⚠️ Limitations
+
+- Due to CPU limitations and time consumption, some formats have been removed
+- Some formats have been removed due to browser support (e.g., AVI for video splitter)
+
+## 🐛 Known Issues
+
+- Sometimes when using the same media file for multiple exports, the progress bar may show as aborted but the process will finish successfully
+
+## 🙏 Support
+
+If you find this project helpful, consider:
+
+- ⭐ Starring the repository
+- ☕ [Buying me a coffee](https://buymeacoffee.com/nubsuki)
+- 🐛 Reporting bugs or suggesting features
+
+## 🔗 Links
+
+- **Live**: [iloveffmpeg.xyz](https://iloveffmpeg.xyz/)
+- **Support**: [buymeacoffee.com/nubsuki](https://buymeacoffee.com/nubsuki)
+
+---
+
+Made with ❤️ by [nubsuki](https://github.com/nubsuki)

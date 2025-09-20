@@ -10,10 +10,25 @@ export default defineConfig({
   server: {
     headers: {
       'Cross-Origin-Embedder-Policy': 'require-corp',
-      'Cross-Origin-Opener-Policy': 'same-origin'
+      'Cross-Origin-Opener-Policy': 'same-origin',
+      'Cross-Origin-Resource-Policy': 'same-site'
+    },
+    fs: {
+      allow: ['..']
+    }
+  },
+  build: {
+    target: 'esnext',
+    rollupOptions: {
+      output: {
+        format: 'es'
+      }
     }
   },
   worker: {
     format: 'es'
+  },
+  define: {
+    global: 'globalThis'
   }
 })
