@@ -23,16 +23,16 @@ Main reason for creating this is due to quality loss when trimming in Movies&TV 
 **Audio Input**: MP3, WAV, AAC, FLAC, OGG, M4A, and more
 **Audio Output**: MP3, WAV, AAC, FLAC, OGG, M4A
 
-## ⚠️ Limitations
+## Limitations
 
 - Due to CPU limitations and time consumption, some formats have been removed
 - Some formats have been removed due to browser support (e.g., AVI for video splitter)
 
-## 🐛 Known Issues
+## Known Issues
 
 - Sometimes when using the same media file for multiple exports, the progress bar may show as aborted but the process will finish successfully
 
-## 🙏 Support
+## Support
 
 If you find this project helpful, consider:
 
@@ -43,7 +43,6 @@ If you find this project helpful, consider:
 ## 🔗 Links
 
 - **Live**: [iloveffmpeg.xyz](https://iloveffmpeg.xyz/)
-- **Support**: [buymeacoffee.com/nubsuki](https://buymeacoffee.com/nubsuki)
 
 ---
 
