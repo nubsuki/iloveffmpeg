@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+
+Disallow: /*.map$
+
+Allow: /sitemap.xml
+Allow: /robots.txt
+
+Sitemap: https://iloveffmpeg.xyz/sitemap.xml
