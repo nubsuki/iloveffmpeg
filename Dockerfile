@@ -21,7 +21,7 @@ FROM nginx:alpine
 # Copy custom nginx config for SPA routing and FFmpeg headers
 RUN echo 'server { \
     listen 80; \
-    server_name localhost; \
+    server_name _; \
     root /usr/share/nginx/html; \
     index index.html; \
     \
