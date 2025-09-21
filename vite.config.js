@@ -7,9 +7,8 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['@ffmpeg/ffmpeg', '@ffmpeg/util']
   },
+  base: process.env.VITE_BASE_PATH || "/iloveffmpeg",
   server: {
-    host: '0.0.0.0',
-    port: 3001,
     headers: {
       'Cross-Origin-Embedder-Policy': 'require-corp',
       'Cross-Origin-Opener-Policy': 'same-origin',
