@@ -16,13 +16,12 @@ Main reason for creating this is due to quality loss when trimming in Movies&TV 
 
 **Video Input**: MP4, AVI, MOV, MKV, WebM, and more
 **Video Output**: MP4, AVI, MOV, MKV
-
 **Audio Input**: MP3, WAV, AAC, FLAC, OGG, M4A, and more
 **Audio Output**: MP3, WAV, AAC, FLAC, OGG, M4A
 
 ## Limitations
 
-- Due to CPU limitations and time consumption, some formats have been removed
+- Some formats are not supported due to performance limitations of FFmpeg.wasm in browser environments
 - Some formats have been removed due to browser support (e.g., AVI for video splitter)
 
 ## Known Issues
@@ -43,4 +42,4 @@ If you find this project helpful, consider:
 
 ---
 
-Made with ❤️ by [nubsuki](https://github.com/nubsuki)
+Made by [nubsuki](https://github.com/nubsuki)
