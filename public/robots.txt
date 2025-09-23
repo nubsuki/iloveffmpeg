@@ -7,4 +7,4 @@ Disallow: /*.map$
 Allow: /sitemap.xml
 Allow: /robots.txt
 
-Sitemap: https://iloveffmpeg.xyz/sitemap.xml
+Sitemap: https://www.iloveffmpeg.xyz/sitemap.xml
