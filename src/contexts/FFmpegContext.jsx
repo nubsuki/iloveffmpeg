@@ -19,6 +19,30 @@ export const FFmpegProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [logs, setLogs] = useState([]);
 
+  // Function to check if multi-threaded FFmpeg is supported
+  const isMultiThreadSupported = () => {
+    const origin = window.location.origin;
+    
+    // Check if we're in a secure context
+    if (window.isSecureContext) {
+      return true;
+    }
+    
+    // Check if it's localhost or .local domain
+    if (origin.includes('localhost') || origin.includes('.local')) {
+      return true;
+    }
+    
+    // If it's an IP address without HTTPS, use single-threaded
+    const isIP = /^https?:\/\/\d+\.\d+\.\d+\.\d+/.test(origin);
+    if (isIP && !origin.startsWith('https://')) {
+      console.warn('Using single-threaded FFmpeg due to IP access without HTTPS');
+      return false;
+    }
+    
+    return true;
+  };
+
   useEffect(() => {
     const loadFFmpeg = async () => {
       if (loaded || loading) return;
@@ -31,12 +55,18 @@ export const FFmpegProvider = ({ children }) => {
 
         // Set up logging
         ffmpegInstance.on('log', ({ message }) => {
-          setLogs(prev => [...prev.slice(-50), message]); // Keep last 50 logs
+          setLogs(prev => [...prev.slice(-50), message]);
         });
 
-        // Load FFmpeg
-        const baseURL = 'https://unpkg.com/@ffmpeg/core-mt@0.12.6/dist/esm';
-        await ffmpegInstance.load({
+        // Choose FFmpeg version based on environment
+        const useMultiThread = isMultiThreadSupported();
+        const coreType = useMultiThread ? 'core-mt' : 'core';
+        const baseURL = `https://unpkg.com/@ffmpeg/${coreType}@0.12.6/dist/esm`;
+
+        console.log(`Loading ${useMultiThread ? 'multi-threaded' : 'single-threaded'} FFmpeg`);
+
+        // Load configuration
+        const loadConfig = {
           coreURL: await toBlobURL(
             `${baseURL}/ffmpeg-core.js`,
             'text/javascript'
@@ -45,11 +75,17 @@ export const FFmpegProvider = ({ children }) => {
             `${baseURL}/ffmpeg-core.wasm`,
             'application/wasm'
           ),
-          workerURL: await toBlobURL(
+        };
+
+        // Add worker URL only for multi-threaded version
+        if (useMultiThread) {
+          loadConfig.workerURL = await toBlobURL(
             `${baseURL}/ffmpeg-core.worker.js`,
             'text/javascript'
-          ),
-        });
+          );
+        }
+
+        await ffmpegInstance.load(loadConfig);
 
         setFFmpeg(ffmpegInstance);
         setLoaded(true);
