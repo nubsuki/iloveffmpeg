@@ -546,8 +546,12 @@
     font-size: 2rem;
   }
 
-  .splitControls {
+  .timeControlsRow {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .splitControls {
     gap: 1rem;
   }
 
