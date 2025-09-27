@@ -23,6 +23,10 @@ Main reason for creating this is due to quality loss when trimming in Movies&TV 
 
 - Some formats are not supported due to performance limitations of FFmpeg.wasm in browser environments
 - Some formats have been removed due to browser support (e.g., AVI for video splitter)
+- **Multi-threaded processing**: Due to browser security restrictions, multi-threaded FFmpeg (faster processing) only works in secure contexts:
+  - ✅ HTTPS with a domain
+  - ✅ `localhost` access
+  - ❌ IP addresses over HTTP (automatically falls back to single-threaded mode)
 
 ## Known Issues
 

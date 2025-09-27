@@ -1,5 +1,7 @@
 # Build stage
 FROM node:20-alpine AS build
+
+# Curl for health checks
 RUN apk add --no-cache curl
 
 WORKDIR /app
