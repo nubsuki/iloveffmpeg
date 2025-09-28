@@ -7,7 +7,7 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['@ffmpeg/ffmpeg', '@ffmpeg/util']
   },
-  base: process.env.VITE_BASE_PATH || "/iloveffmpeg",
+  base: process.env.VITE_BASE_PATH || "/",
   server: {
     host: '0.0.0.0',
     headers: {
