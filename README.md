@@ -1,5 +1,12 @@
 # ILoveFFmpeg
 
+[![Docker](https://github.com/nubsuki/iloveffmpeg/actions/workflows/docker-image.yml/badge.svg)](https://github.com/nubsuki/iloveffmpeg/actions/workflows/docker-image.yml)
+[![License](https://img.shields.io/github/license/nubsuki/iloveffmpeg)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/nubsuki/iloveffmpeg?style=social)](https://github.com/nubsuki/iloveffmpeg/stargazers)
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Filoveffmpeg.xyz)](https://iloveffmpeg.xyz)
+[![BuyMeACoffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Donate-yellow?logo=buymeacoffee)](https://buymeacoffee.com/nubsuki)
+
+
 Browser-based multimedia toolkit that runs entirely in your browser using [FFmpeg.wasm](https://github.com/ffmpegwasm/ffmpeg.wasm). No uploads, no tracking, complete privacy - your files never leave your device.
 
 Main reason for creating this is due to quality loss when trimming in Movies&TV player apps in Windows. Name is inspired by ILovePDF.
@@ -27,6 +34,7 @@ Main reason for creating this is due to quality loss when trimming in Movies&TV 
   - ✅ HTTPS with a domain
   - ✅ `localhost` access
   - ❌ IP addresses over HTTP (automatically falls back to single-threaded mode)
+- Due to FFmpeg.wasm memory limitations when handling large files in the browser it may fail.
 
 ## Known Issues
 
