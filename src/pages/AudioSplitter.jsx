@@ -11,6 +11,7 @@ import {
 import { FaScissors } from "react-icons/fa6";
 import { TbProgressBolt } from "react-icons/tb";
 import styles from "./AudioSplitter.module.css";
+import { isFileSizeValid, getFileSizeErrorMessage } from "../utils/fileSize";
 
 const AudioSplitter = () => {
   const [audio, setAudio] = useState(null);
@@ -33,6 +34,12 @@ const AudioSplitter = () => {
   const handleAudioUpload = (event) => {
     const file = event.target.files[0];
     if (file && file.type.startsWith("audio/")) {
+      // Check file size
+      if (!isFileSizeValid(file)) {
+        alert(getFileSizeErrorMessage(file));
+        event.target.value = ''; // Reset input
+        return;
+      }
       setAudio(file);
       const url = URL.createObjectURL(file);
       setAudioUrl(url);

@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { TbProgressBolt } from "react-icons/tb";
 import styles from "./VideoConverter.module.css";
+import { isFileSizeValid, getFileSizeErrorMessage } from "../utils/fileSize";
 
 const VideoConverter = () => {
   const [video, setVideo] = useState(null);
@@ -47,6 +48,13 @@ const VideoConverter = () => {
   const handleVideoUpload = (event) => {
     const file = event.target.files[0];
     if (file && file.type.startsWith("video/")) {
+    // Check file size
+    if (!isFileSizeValid(file)) {
+      alert(getFileSizeErrorMessage(file));
+      event.target.value = ''; // Reset input
+      return;
+    }
+
       // Check if it's a compatible format
       const fileName = file.name.toLowerCase();
       const compatibleExtensions = ['.mp4', '.mkv', '.avi', '.mov', '.m4v'];

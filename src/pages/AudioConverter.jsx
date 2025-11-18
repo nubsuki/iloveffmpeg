@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { TbProgressBolt } from "react-icons/tb";
 import styles from "./AudioConverter.module.css";
+import { isFileSizeValid, getFileSizeErrorMessage } from "../utils/fileSize";
 
 const AudioConverter = () => {
   const [audio, setAudio] = useState(null);
@@ -75,6 +76,13 @@ const AudioConverter = () => {
   const handleAudioUpload = (event) => {
     const file = event.target.files[0];
     if (file && file.type.startsWith("audio/")) {
+      // Check file size
+      if (!isFileSizeValid(file)) {
+        alert(getFileSizeErrorMessage(file));
+        event.target.value = ''; // Reset input
+        return;
+      }
+      
       // Check if it's a compatible audio format
       const fileName = file.name.toLowerCase();
       const compatibleExtensions = ['.mp3', '.wav', '.flac', '.aac', '.ogg', '.m4a'];

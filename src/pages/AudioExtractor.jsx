@@ -12,6 +12,7 @@ import {
 import { FaWaveSquare } from "react-icons/fa6";
 import { TbProgressBolt } from "react-icons/tb";
 import styles from "./AudioExtractor.module.css";
+import { isFileSizeValid, getFileSizeErrorMessage } from "../utils/fileSize";
 
 const AudioExtractor = () => {
   const [video, setVideo] = useState(null);
@@ -64,6 +65,13 @@ const AudioExtractor = () => {
   const handleVideoUpload = (event) => {
     const file = event.target.files[0];
     if (file && file.type.startsWith("video/")) {
+      // Check file size
+      if (!isFileSizeValid(file)) {
+        alert(getFileSizeErrorMessage(file));
+        event.target.value = ''; // Reset input
+        return;
+      }
+      
       setVideo(file);
       const url = URL.createObjectURL(file);
       setVideoUrl(url);
