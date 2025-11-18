@@ -37,7 +37,7 @@ jobs:
       with:
         images: |
           ghcr.io/${{ github.repository }}
-          ${{ secrets.DOCKERHUB_USERNAME }}/iloveffmpeg
+          ${{ secrets.DOCKERHUB_USERNAME }}/i-love-ffmpeg
         tags: |
           type=raw,value=latest,enable={{is_default_branch}}
           type=sha,prefix={{branch}}-
